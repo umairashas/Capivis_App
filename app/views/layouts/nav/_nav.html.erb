@@ -1,50 +1,52 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Capivis App</a>
+    <%= link_to "Capivis App", root_path, class: "navbar-brand" %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="/home">Home</a>
+          <%= link_to "Home", home_path, class: "nav-link active" %>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
+          <%= link_to "About", about_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/contact">Contact Us</a>
+          <%= link_to "Contact Us", contact_path, class: "nav-link" %>
         </li>
-        
+
+        <% if current_user&.role == 'admin' %>
+          <li class="nav-item">
+            <%= link_to "Admin Dashboard", questions_path, class: 'nav-link active' %>
+          </li>
+        <% end %>
+
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to "Hi, #{current_user.email}", edit_user_registration_path, class: 'nav-link active' %>
+            <%= link_to "Hi, #{current_user.email}", edit_user_registration_path, class: "nav-link active" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Sign Out', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'nav-link active' %>
+            <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "nav-link active" %>
           </li>
-          
-          <!-- Donor specific links -->
+
           <% if current_user.role == 'donor' %>
             <% if current_user.donor.present? %>
-              <!-- If donor has filled out the form, show the 'View My Donor Profile' link -->
               <li class="nav-item">
-                <%= link_to 'View My Donor Profile', donors_path, class: 'btn btn-primary' %>
+                <%= link_to "View My Donor Profile", donors_path, class: "btn btn-primary" %>
               </li>
             <% else %>
-              <!-- If donor hasn't filled out the form, show the 'Register Now' link -->
               <li class="nav-item">
-                <%= link_to 'Register Now', new_donor_path, class: 'btn btn-primary' %>
+                <%= link_to "Register Now", new_donor_path, class: "btn btn-primary" %>
               </li>
             <% end %>
           <% end %>
-          
         <% else %>
           <li class="nav-item">
-            <a href="<%= new_user_session_path %>" class="btn btn-primary">Sign In</a>
+            <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary" %>
           </li>
           <li class="nav-item ms-2">
-            <a href="<%= new_user_registration_path %>" class="btn btn-secondary">Sign Up</a>
+            <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-secondary" %>
           </li>
         <% end %>
       </ul>
