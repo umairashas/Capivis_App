@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <h2 class="text-center">Blood Donation</h2>
+  <p class="lead text-center">Please read and agree to the following terms and conditions before proceeding with your blood donation.</p>
+  <div class="terms mt-4">
+    <h3>Terms and Conditions</h3>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">1. You must be at least 18 years old and in good health to donate blood.</li>
+      <li class="list-group-item">2. Donating blood should not cause harm to your health. If you have any medical conditions or concerns, please consult with a doctor before donating.</li>
+      <li class="list-group-item">3. You will need to disclose any medication you are taking, as well as recent travel history.</li>
+      <li class="list-group-item">4. The blood you donate will be used for patients in need of blood transfusions and other medical treatments.</li>
+      <li class="list-group-item">5. Your personal information will be kept confidential and used only for the purposes of the blood donation program.</li>
+      <li class="list-group-item">6. By donating blood, you consent to having your blood tested for safety and compatibility.</li>
+      <li class="list-group-item">7. The blood donation center reserves the right to refuse donation if you do not meet the eligibility criteria.</li>
+      <li class="list-group-item">8. You agree to follow the guidelines and instructions provided by the staff at the donation center.</li>
+      <li class="list-group-item">9. You understand that side effects may occur, such as dizziness or lightheadedness, but that they are generally mild and temporary.</li>
+      <li class="list-group-item">10. By donating blood, you help save lives, and your contribution is highly appreciated.</li>
+    </ul>
+  </div>
+  <div class="text-center mt-4">
+    <%= form_with model: @donor_handbook, method: :post do |f| %>
+      <div class="form-check text-left">
+        <%= f.check_box :terms_accepted, required: true, class: "form-check-input" %>
+        <%= f.label :terms_accepted, "I agree to the terms and conditions", class: "form-check-label" %>
+      </div>
+      <%= f.submit "Submit", class: "btn btn-primary btn-lg mt-3" %>
+    <% end %> <!-- Correct closing of form_with block -->
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<%= form_with url: donor_history_questionnaires_path, method: :post, local: true do |form| %>
+  <% if @questions.present? %>
+    <% @questions.each do |question| %>
+      <div class="form-group mb-4">
+        <%= form.label "question_#{question.id}", question.text, class: "form-label" %>
+        
+        <% if question.answer_type == "true_false" %>
+          <!-- True/False Question -->
+          <div class="form-check">
+            <%= form.radio_button "donor_history_questionnaire[answers][#{question.id}]", 'yes', class: "form-check-input" %>
+            <%= form.label "donor_history_questionnaire_answers_#{question.id}_yes", "Yes", class: "form-check-label" %>
+          </div>
+          <div class="form-check">
+            <%= form.radio_button "donor_history_questionnaire[answers][#{question.id}]", 'no', class: "form-check-input" %>
+            <%= form.label "donor_history_questionnaire_answers_#{question.id}_no", "No", class: "form-check-label" %>
+          </div>
+        <% elsif question.answer_type == "text" %>
+          <!-- Text-Based Question -->
+          <%= form.text_area "donor_history_questionnaire[answers][#{question.id}]", class: "form-control", rows: 3, placeholder: "Enter your answer here" %>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-center text-danger">No questions available at the moment.</p>
+  <% end %>
+
+  <div class="form-group text-center mt-4">
+    <%= form.submit 'Submit Responses', class: 'btn btn-primary' %>
+    <%= link_to 'Back to Donors', donors_path, class: 'btn btn-secondary ms-2' %>
+  </div>
+<% end %>

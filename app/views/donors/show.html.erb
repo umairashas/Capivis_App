@@ -1,0 +1,64 @@
+<h1 class="text-center mb-4">Donor Details</h1>
+
+<% if @donor.present? %>
+  <!-- Donor Details Section -->
+  <div class="donor-details container">
+    <h3>Personal Information</h3>
+    <p><strong>Full Name:</strong> <%= @donor.first_name %> <%= @donor.middle_name %> <%= @donor.last_name %></p>
+    <p><strong>Gender:</strong> <%= @donor.gender %></p>
+    <p><strong>Birth Date:</strong> <%= @donor.birth_date %></p>
+    <p><strong>Phone Number:</strong> <%= @donor.phone_number %></p>
+    <p><strong>Alternate Phone Number:</strong> <%= @donor.alternate_phone_number %></p>
+    <p><strong>City:</strong> <%= @donor.city %></p>
+    <p><strong>State:</strong> <%= @donor.state %></p>
+    <p><strong>Country:</strong> <%= @donor.country %></p>
+    <p><strong>Language:</strong> <%= @donor.language %></p>
+    <p><strong>Address:</strong> <%= @donor.address_line1 %>, <%= @donor.address_line2 %></p>
+    <p><strong>ZIP Code:</strong> <%= @donor.zipcode %></p>
+    <p><strong>Arrival Date:</strong> <%= @donor.arrival_datetime %></p>
+    <p><strong>Potential Fraud:</strong> <%= @donor.potential_fraud %></p>
+    <p><strong>Document:</strong> <%= @donor.document.present? ? "Uploaded" : "Not Uploaded" %></p>
+  </div>
+
+  <!-- Blood Donation Terms Section -->
+  <div class="donor-details container mt-5">
+    <h3>Blood Donation Terms and Conditions</h3>
+    <p><strong>You have agreed to the following terms and conditions for your blood donation:</strong></p>
+    <div class="terms">
+      <p>1. You must be at least 18 years old and in good health to donate blood.</p>
+      <p>2. Donating blood should not cause harm to your health. If you have any medical conditions or concerns, please consult with a doctor before donating.</p>
+      <p>3. You will need to disclose any medication you are taking, as well as recent travel history.</p>
+      <p>4. The blood you donate will be used for patients in need of blood transfusions and other medical treatments.</p>
+      <p>5. Your personal information will be kept confidential and used only for the purposes of the blood donation program.</p>
+      <p>6. By donating blood, you consent to having your blood tested for safety and compatibility.</p>
+      <p>7. The blood donation center reserves the right to refuse donation if you do not meet the eligibility criteria.</p>
+      <p>8. You agree to follow the guidelines and instructions provided by the staff at the donation center.</p>
+      <p>9. You understand that side effects may occur, such as dizziness or lightheadedness, but that they are generally mild and temporary.</p>
+      <p>10. By donating blood, you help save lives, and your contribution is highly appreciated.</p>
+    </div>
+  </div>
+
+  <!-- Donor History Questionnaire Section -->
+ <div class="donor-details container mt-5">
+  <h3>Donor History Questionnaire (DHQ)</h3>
+  <p><strong>Below are the responses provided by the donor:</strong></p>
+
+  <% if @donor_history_questionnaires.present? %>
+    <% @donor_history_questionnaires.each do |response| %>
+      <div class="form-group mb-4">
+        <p><strong>Question:</strong> <%= response.question.text %></p>
+        <p><strong>Answer:</strong> <%= response.answer.capitalize %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-center text-danger">No responses have been provided by the donor.</p>
+  <% end %>
+
+  <div class="form-group text-center mt-4">
+    <%= link_to 'Back to Donors', donors_path, class: 'btn btn-secondary ms-2' %>
+  </div>
+</div>
+
+<% else %>
+  <p class="text-center text-danger">Donor details not found.</p>
+<% end %>
