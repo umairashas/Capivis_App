@@ -22,20 +22,8 @@
 
   <!-- Blood Donation Terms Section -->
   <div class="donor-details container mt-5">
-    <h3>Blood Donation Terms and Conditions</h3>
-    <p><strong>You have agreed to the following terms and conditions for your blood donation:</strong></p>
-    <div class="terms">
-      <p>1. You must be at least 18 years old and in good health to donate blood.</p>
-      <p>2. Donating blood should not cause harm to your health. If you have any medical conditions or concerns, please consult with a doctor before donating.</p>
-      <p>3. You will need to disclose any medication you are taking, as well as recent travel history.</p>
-      <p>4. The blood you donate will be used for patients in need of blood transfusions and other medical treatments.</p>
-      <p>5. Your personal information will be kept confidential and used only for the purposes of the blood donation program.</p>
-      <p>6. By donating blood, you consent to having your blood tested for safety and compatibility.</p>
-      <p>7. The blood donation center reserves the right to refuse donation if you do not meet the eligibility criteria.</p>
-      <p>8. You agree to follow the guidelines and instructions provided by the staff at the donation center.</p>
-      <p>9. You understand that side effects may occur, such as dizziness or lightheadedness, but that they are generally mild and temporary.</p>
-      <p>10. By donating blood, you help save lives, and your contribution is highly appreciated.</p>
-    </div>
+    <h3>Thank You for Agreeing to the Terms and Conditions</h3>
+    <p><strong>Thank you for your valuable contribution to saving lives!</strong></p>
   </div>
 
   <!-- Donor History Questionnaire Section -->
@@ -54,11 +42,9 @@
     <p class="text-center text-danger">No responses have been provided by the donor.</p>
   <% end %>
 
-  <div class="form-group text-center mt-4">
-    <%= link_to 'Back to Donors', donors_path, class: 'btn btn-secondary ms-2' %>
-  </div>
+<div class="form-group text-center mt-4">
+  <%= link_to 'Back to Donors', current_user.admin? ? all_donors_questions_path : donors_path, class: 'btn btn-secondary ms-2' %>
 </div>
-
 <% else %>
   <p class="text-center text-danger">Donor details not found.</p>
 <% end %>

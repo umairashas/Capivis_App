@@ -1,11 +1,12 @@
 <!-- app/views/questions/index.html.erb -->
 <h1>All Questions</h1>
 
-<% if can? :create, Question %>
-  <%= link_to 'New Question', new_question_path, class: 'btn btn-primary' %>
-<% end %>
-<%= link_to 'View All Donors', all_donors_questions_path, class: 'btn btn-info mt-3' %>
-
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <% if can? :create, Question %>
+    <%= link_to 'New Question', new_question_path, class: 'btn btn-primary' %>
+  <% end %>
+  <%= link_to 'View All Donors', all_donors_questions_path, class: 'btn btn-info' %>
+</div>
 
 <table class="table">
   <thead>

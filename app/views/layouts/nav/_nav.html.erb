@@ -30,17 +30,6 @@
             <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "nav-link active" %>
           </li>
 
-          <% if current_user.role == 'donor' %>
-            <% if current_user.donor.present? %>
-              <li class="nav-item">
-                <%= link_to "View My Donor Profile", donors_path, class: "btn btn-primary" %>
-              </li>
-            <% else %>
-              <li class="nav-item">
-                <%= link_to "Register Now", new_donor_path, class: "btn btn-primary" %>
-              </li>
-            <% end %>
-          <% end %>
         <% else %>
           <li class="nav-item">
             <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary" %>

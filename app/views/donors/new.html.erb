@@ -16,7 +16,7 @@
 
   <div class="form-group">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name, class: 'form-control' %>
+    <%= form.text_field :first_name, value: @first_name, class: 'form-control', required: true %>
   </div>
 
   <div class="form-group">
@@ -26,7 +26,7 @@
 
   <div class="form-group">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name, class: 'form-control' %>
+    <%= form.text_field :last_name, value: @last_name, class: 'form-control', required: true %>
   </div>
 
   <div class="form-group">

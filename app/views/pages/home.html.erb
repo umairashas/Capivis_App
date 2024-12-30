@@ -29,6 +29,14 @@
         <h1 class="display-3">Welcome to Capivis App!</h1>
         <p class="lead">Your journey starts here.</p>
 
+        <!-- Donor Buttons Below the Welcome Message -->
+        <% if user_signed_in? && current_user.role == 'donor' %>
+          <% if current_user.donor.present? %>
+            <%= link_to "View My Donor Profile", donors_path, class: "btn btn-primary mt-3" %>
+          <% else %>
+            <%= link_to "Register Now", new_donor_path, class: "btn btn-primary mt-3" %>
+          <% end %>
+        <% end %>
         
       </div>
     </div>
