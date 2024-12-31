@@ -11,12 +11,15 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2024_12_31_074723) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "centres", force: :cascade do |t|
     t.string "name"
     t.string "pincode"
     t.string "location"
     t.string "phone_number"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_centres_on_user_id"
@@ -29,9 +32,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_31_074723) do
   end
 
   create_table "donor_history_questionnaires", force: :cascade do |t|
-    t.integer "donor_id", null: false
-    t.integer "user_id", null: false
-    t.integer "question_id", null: false
+    t.bigint "donor_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "question_id", null: false
     t.text "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -41,8 +44,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_31_074723) do
   end
 
   create_table "donors", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "centre_id"
+    t.bigint "user_id"
+    t.bigint "centre_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "first_name"
@@ -67,7 +70,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_31_074723) do
   end
 
   create_table "operators", force: :cascade do |t|
-    t.integer "centre_id", null: false
+    t.bigint "centre_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["centre_id"], name: "index_operators_on_centre_id"

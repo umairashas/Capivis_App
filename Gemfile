@@ -58,3 +58,4 @@ end
 gem 'devise'
 gem 'rename'
 gem 'cancancan'
+gem 'pg'
