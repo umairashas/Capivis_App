@@ -5,6 +5,12 @@ class CentresController < ApplicationController
     @centres = Centre.all
   end
 
+  def show 
+    @centre = Centre.find(params[:id])
+      @donors = @centre.donors 
+      @donor_count = @donors.count 
+  end
+
   def new
     @centre = Centre.new
   end
@@ -26,6 +32,7 @@ class CentresController < ApplicationController
   end
 
   def update
+    @centre = Centre.find(params[:id])
     if @centre.update(centre_params)
       redirect_to centres_path, notice: "Centre updated successfully!"
     else
@@ -48,6 +55,6 @@ class CentresController < ApplicationController
   end
 
   def centre_params
-    params.require(:centre).permit(:name, :email, :password, :pincode, :location, :phone_number)
+    params.require(:centre).permit(:name, :pincode, :location, :phone_number)
   end
 end

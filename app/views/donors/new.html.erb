@@ -85,6 +85,11 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :centre_id, "Select Centre" %>
+    <%= form.select :centre_id, Centre.all.collect { |centre| [centre.name, centre.id] }, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :document %>
     <%= form.text_area :document, class: 'form-control' %>
   </div>

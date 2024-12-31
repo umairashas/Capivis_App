@@ -8,6 +8,6 @@ class User < ApplicationRecord
   has_many :centres, dependent: :destroy
  # validates :first_name, :last_name, :email, presence: true
    # validates :aadhar_number, presence: true, length: { is: 12 }, numericality: { only_integer: true }
-  enum role: { donor: 0, admin: 1, operator: 2 }
-
+   enum :role, {:donor=>0, :admin=>1, :operator=>2}
+    
 end

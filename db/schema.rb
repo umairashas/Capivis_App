@@ -10,11 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_30_114714) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_31_074723) do
   create_table "centres", force: :cascade do |t|
     t.string "name"
-    t.string "email"
-    t.string "password"
     t.string "pincode"
     t.string "location"
     t.string "phone_number"
@@ -68,6 +66,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_30_114714) do
     t.index ["user_id"], name: "index_donors_on_user_id"
   end
 
+  create_table "operators", force: :cascade do |t|
+    t.integer "centre_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["centre_id"], name: "index_operators_on_centre_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "text"
     t.string "answer_type"
@@ -102,4 +107,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_30_114714) do
   add_foreign_key "donor_history_questionnaires", "users"
   add_foreign_key "donors", "centres"
   add_foreign_key "donors", "users"
+  add_foreign_key "operators", "centres"
 end

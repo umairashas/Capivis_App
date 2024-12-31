@@ -14,7 +14,11 @@
     <p><strong>Country:</strong> <%= @donor.country %></p>
     <p><strong>Language:</strong> <%= @donor.language %></p>
     <p><strong>Address:</strong> <%= @donor.address_line1 %>, <%= @donor.address_line2 %></p>
+
     <p><strong>ZIP Code:</strong> <%= @donor.zipcode %></p>
+    <p><strong>Centre Name:</strong> 
+      <%= @donor.centre.name %>  <!-- Display the name of the selected centre -->
+  </p>
     <p><strong>Arrival Date:</strong> <%= @donor.arrival_datetime %></p>
     <p><strong>Potential Fraud:</strong> <%= @donor.potential_fraud %></p>
     <p><strong>Document:</strong> <%= @donor.document.present? ? "Uploaded" : "Not Uploaded" %></p>
@@ -45,6 +49,7 @@
 <div class="form-group text-center mt-4">
   <%= link_to 'Back to Donors', current_user.admin? ? all_donors_questions_path : donors_path, class: 'btn btn-secondary ms-2' %>
 </div>
+
 <% else %>
   <p class="text-center text-danger">Donor details not found.</p>
 <% end %>

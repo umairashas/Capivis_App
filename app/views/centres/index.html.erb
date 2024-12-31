@@ -4,7 +4,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Email</th>
       <th>Pincode</th>
       <th>Location</th>
       <th>Phone Number</th>
@@ -15,12 +14,12 @@
     <% @centres.each do |centre| %>
       <tr>
         <td><%= centre.name %></td>
-        <td><%= centre.email %></td>
         <td><%= centre.pincode %></td>
         <td><%= centre.location %></td>
         <td><%= centre.phone_number %></td>
         <td>
           <div style="display: flex; justify-content: space-between;">
+            <%= link_to "Show", centre_path(centre), class: 'btn btn-info' %>
             <%= link_to "Edit", edit_centre_path(centre), class: 'btn btn-warning' %>
             <%= button_to "Destroy", centre_path(centre), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>
           </div>
@@ -33,4 +32,4 @@
 <div style="display: flex; justify-content: space-between; margin-top: 20px;">
   <%= link_to "Add new", new_centre_path, class: 'btn btn-success' %>
   <%= link_to "Back", questions_path, class: 'btn btn-secondary' %>
-</div>  
+</div>

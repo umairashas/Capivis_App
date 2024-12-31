@@ -42,7 +42,7 @@ class DonorsController < ApplicationController
     params.require(:donor).permit(
       :first_name, :middle_name, :last_name, :birth_date, :gender, :zipcode,
       :phone_number, :alternate_phone_number, :city, :state, :country,
-      :language, :address_line1, :address_line2, :document, :arrival_datetime,
+      :language, :address_line1, :address_line2, :centre_id, :document, :arrival_datetime,
       :potential_fraud
     )
   end
