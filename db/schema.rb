@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_29_055737) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_30_114714) do
+  create_table "centres", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password"
+    t.string "pincode"
+    t.string "location"
+    t.string "phone_number"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_centres_on_user_id"
+  end
+
   create_table "donor_handbooks", force: :cascade do |t|
     t.boolean "terms_accepted"
     t.datetime "created_at", null: false
@@ -31,6 +44,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_29_055737) do
 
   create_table "donors", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "centre_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "first_name"
@@ -50,6 +64,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_29_055737) do
     t.text "document"
     t.datetime "arrival_datetime"
     t.string "potential_fraud"
+    t.index ["centre_id"], name: "index_donors_on_centre_id"
     t.index ["user_id"], name: "index_donors_on_user_id"
   end
 
@@ -81,8 +96,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_29_055737) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "centres", "users"
   add_foreign_key "donor_history_questionnaires", "donors"
   add_foreign_key "donor_history_questionnaires", "questions"
   add_foreign_key "donor_history_questionnaires", "users"
+  add_foreign_key "donors", "centres"
   add_foreign_key "donors", "users"
 end

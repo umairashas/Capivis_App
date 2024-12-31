@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>All Questions</h1>
+  <%= link_to 'Back', questions_path, class: 'btn btn-primary' %>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Sr. No.</th>
+      <th>Text</th>
+      <th>Answer Type</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @questions.each_with_index do |question, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= question.text %></td>
+        <td><%= question.answer_type %></td>
+        <td>
+          <% if can? :update, question %>
+            <%= link_to 'Edit', edit_question_path(question), class: 'btn btn-warning' %>
+          <% end %>
+
+          <% if can? :destroy, question %>
+            <%= button_to 'Delete', question_path(question), method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure?" } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

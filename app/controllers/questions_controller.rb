@@ -1,7 +1,11 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!  # Assuming Devise for authentication
   load_and_authorize_resource  # This will load and authorize the Question resource
-
+  
+   def all_questions
+    @questions = Question.all
+  end
+  
   # GET /questions
   def index
     @questions = Question.all

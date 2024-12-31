@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
   has_one :donor, dependent: :destroy
   has_many :donor_history_questionnaire, dependent: :destroy
-  validates :first_name, :last_name, :email, presence: true
-    validates :aadhar_number, presence: true, length: { is: 12 }, numericality: { only_integer: true }
-  enum role: { donor: 0, admin: 1, hr: 2 }
+  has_many :centres, dependent: :destroy
+ # validates :first_name, :last_name, :email, presence: true
+   # validates :aadhar_number, presence: true, length: { is: 12 }, numericality: { only_integer: true }
+  enum role: { donor: 0, admin: 1, operator: 2 }
+
 end

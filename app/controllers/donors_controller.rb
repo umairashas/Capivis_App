@@ -4,7 +4,7 @@ class DonorsController < ApplicationController
   def index
     @donors = Donor.all
     @questions = Question.all
-    @donor = current_user.donor
+    @donor = current_user.donor if current_user.donor.present?
   end
 
    def show
