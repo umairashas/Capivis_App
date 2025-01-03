@@ -1,16 +1,45 @@
-<!-- app/views/donors/index.html.erb -->
+<h1>My Details</h1>
+<%= link_to 'Back', admin_dashboard_path, class: 'btn btn-primary mb-4 float-end' %>
 
-<h1>Donor Details</h1>
-
-<% if @donor.present? %>
-  <table class="table">
+<% if current_user.admin? %>
+  <!-- Admin can see all donors -->
+  <h3>All Donors</h3>
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Gender</th>
-        <th>Birth Date</th>
+        <th>Email</th>
         <th>Phone Number</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @donors.each do |donor| %>
+        <tr>
+          <td><%= donor.first_name %></td>
+          <td><%= donor.last_name %></td>
+          <td><%= donor.user.email %></td> <!-- Access email through the associated user -->
+          <td><%= donor.phone_number %></td>
+          <td>
+            <%= link_to 'Show', donor_path(donor), class: 'btn btn-warning btn-sm' %> 
+            <%= button_to 'Delete', donor_path(donor), method: :delete, data: { confirm: 'Are you sure you want to delete this donor?' }, class: 'btn btn-danger btn-sm' %> 
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% elsif @donor.present? %>
+  <!-- Donor can only see their own profile -->
+  <h3>Your Profile</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Screening Status</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -18,16 +47,26 @@
       <tr>
         <td><%= @donor.first_name %></td>
         <td><%= @donor.last_name %></td>
-        <td><%= @donor.gender %></td>
-        <td><%= @donor.birth_date %></td>
+        <td><%= current_user.email %></td> <!-- For the donor, directly use current_user.email -->
         <td><%= @donor.phone_number %></td>
+        
+        <!-- Check if the donor has a screening and if it is completed -->
         <td>
-          <%= link_to 'View Form', donor_path(@donor), class: 'btn btn-info' %>        
+          <% screening = @donor.donor_screening %>
+          <% if screening && screening.created_at.present? %>
+            Screening Completed
+          <% else %>
+            Screening Pending
+          <% end %>
+        </td>
+
+        <td>
+          <%= link_to 'Show', donor_path(@donor), class: 'btn btn-warning btn-sm' %>
         </td>
       </tr>
     </tbody>
   </table>
 <% else %>
-  <p>No donor found for this user.</p>
-    <%= link_to 'Lets Proceed', new_donor_path, class: 'btn btn-success' %>
+  <p>You have not registered as a donor yet.</p>
+  <%= link_to 'Register as a Donor', new_donor_path, class: 'btn btn-success' %>
 <% end %>

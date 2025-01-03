@@ -16,10 +16,16 @@
           <%= link_to "Contact Us", contact_path, class: "nav-link" %>
         </li>
 
-        <% if current_user&.role == 'admin' %>
-          <li class="nav-item">
-            <%= link_to "Admin Dashboard", questions_path, class: 'nav-link active' %>
-          </li>
+        <% if current_user %>
+             <% if current_user.role == 'admin'%>
+                 <li class="nav-item">
+                    <%= link_to "Admin Dashboard", admin_dashboard_path, class: 'nav-link active' %>
+                  </li>
+             <% elsif current_user.role == 'operator' %>
+                 <li class="nav-item">
+                    <%= link_to "Operator Dashboard", operators_path, class: 'nav-link active' %>
+                 </li>
+             <% end %>
         <% end %>
 
         <% if user_signed_in? %>
@@ -29,7 +35,6 @@
           <li class="nav-item">
             <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "nav-link active" %>
           </li>
-
         <% else %>
           <li class="nav-item">
             <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary" %>

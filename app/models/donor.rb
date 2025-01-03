@@ -1,6 +1,7 @@
 class Donor < ApplicationRecord
   belongs_to :user
-  belongs_to :centre 
+  belongs_to :centre
+  has_one :donor_screening, dependent: :destroy 
   has_many :donor_history_questionnaires, dependent: :destroy
   # validates :first_name, presence: true, length: { maximum: 50 }
   # validates :middle_name, length: { maximum: 50 }, allow_nil: true

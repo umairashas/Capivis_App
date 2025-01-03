@@ -30,7 +30,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
 
     if @question.save
-      redirect_to questions_path, notice: 'Question was successfully created.'
+      redirect_to all_questions_path, notice: 'Question was successfully created.'
     else
       render :new
     end
@@ -44,7 +44,7 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/:id
   def update
     if @question.update(question_params)
-      redirect_to questions_path, notice: 'Question was successfully updated.'
+      redirect_to all_questions_path, notice: 'Question was successfully updated.'
     else
       render :edit
     end
@@ -53,7 +53,7 @@ class QuestionsController < ApplicationController
   # DELETE /questions/:id
   def destroy
     @question.destroy
-    redirect_to questions_path, notice: 'Question was successfully destroyed.'
+    redirect_to all_questions_path, notice: 'Question was successfully destroyed.'
   end
 
   private

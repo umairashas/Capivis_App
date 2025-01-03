@@ -1,0 +1,57 @@
+<!-- views/operators/centre_and_donor_details.html.erb -->
+<h1>Centre and Donor Details</h1>
+
+<p><strong>Centre Name:</strong> <%= @centre.name %></p>
+<p><strong>Centre Pincode:</strong> <%= @centre.pincode %></p>
+<p><strong>Centre Location:</strong> <%= @centre.location %></p>
+<p><strong>Centre Phone Number:</strong> <%= @centre.phone_number %></p>
+
+<h2>Associated Donors</h2>
+<p><strong>Donor Count:</strong> <%= @donor_count %></p>
+
+<% if @donors.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Phone Number</th>
+        <th>Screening Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @donors.each do |donor| %>
+        <tr>
+          <td><%= donor.first_name %></td>
+          <td><%= donor.last_name %></td>
+          <td><%= donor.phone_number %></td>
+          <td>
+            <% screening = donor.donor_screening %>
+            <% if screening %> <!-- Check if screening exists for this donor -->
+              <%= screening.created_at.present? ? 'Completed' : 'Pending' %>
+            <% else %>
+              Pending
+            <% end %>
+          </td>
+          <td>
+            <% if screening.nil? || screening.created_at.blank? %> 
+              <!-- Show button only if screening is not completed yet -->
+            <%= link_to "Screening", new_donor_screening_path(donor_id: donor.id, centre_id: @centre.id), class: 'btn btn-secondary' %>
+
+
+            <% else %>
+              <!-- No action if screening is already completed -->
+              <span class="btn btn-success disabled">Screening Completed</span>
+               <%= link_to "Show", donor_screening_path, class: "btn btn-warning btn-sm" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No donors associated with this centre.</p>
+<% end %>
+
+<%= link_to "Back to Operators", operators_path, class: 'btn btn-secondary' %>

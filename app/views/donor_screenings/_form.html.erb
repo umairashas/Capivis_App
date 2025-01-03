@@ -1,0 +1,63 @@
+<!-- views/donor_screenings/_form.html.erb -->
+<%= form_with model: @donor_screening, local: true do |form| %>
+  <!-- Display Donor Name -->
+  <div class="form-group">
+    <%= form.label :donor_name, "Donor" %>
+    <%= form.text_field :donor_name, value: @donor.first_name + " " + @donor.last_name, class: 'form-control', disabled: true %>
+  </div>
+  
+  <!-- Display Centre Name -->
+  <div class="form-group">
+    <%= form.label :centre_name, "Centre" %>
+    <%= form.text_field :centre_name, value: @centre.name, class: 'form-control', disabled: true %>
+  </div>
+  
+  <!-- Acceptable Arm Check -->
+  <div class="form-group">
+    <%= form.label :acceptable_arm_check, "Acceptable Arm Check" %>
+    <%= form.check_box :acceptable_arm_check %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :donor_height, "Donor Height (in cm)" %>
+    <%= form.number_field :donor_height, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :donor_weight, "Donor Weight (in kg)" %>
+    <%= form.number_field :donor_weight, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :donor_blood_pressure, "Blood Pressure (e.g., 120/80)" %>
+    <%= form.text_field :donor_blood_pressure, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :donor_temperature, "Temperature (in °C)" %>
+    <%= form.number_field :donor_temperature, step: 0.1, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :fingerstick, "Fingerstick Timestamp" %>
+    <%= form.datetime_select :fingerstick, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :hematocrit, "Hematocrit (%)" %>
+    <%= form.number_field :hematocrit, step: 0.1, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :total_protein, "Total Protein (g/dL)" %>
+    <%= form.number_field :total_protein, step: 0.1, class: 'form-control' %>
+  </div>
+
+  <!-- Hidden fields for Centre and Donor IDs -->
+  <%= form.hidden_field :centre_id, value: @centre.id %>
+  <%= form.hidden_field :donor_id, value: @donor.id %>
+
+  <div class="form-group mt-3">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

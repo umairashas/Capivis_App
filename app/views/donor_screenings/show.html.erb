@@ -1,0 +1,23 @@
+<h1>Donor Screening Details</h1>
+
+<div class="card">
+  <div class="card-body">
+    <h2>Centre Information</h2>
+    <p><strong>Centre Name:</strong> <%= @donor_screening.centre.name %></p>
+
+    <h2>Donor Information</h2>
+    <p><strong>Donor Name:</strong> <%= @donor_screening.donor.first_name %> <%= @donor_screening.donor.last_name %></p>
+
+    <h2>Screening Details</h2>
+    <p><strong>Height (cm):</strong> <%= @donor_screening.donor_height %></p>
+    <p><strong>Weight (kg):</strong> <%= @donor_screening.donor_weight %></p>
+    <p><strong>Blood Pressure:</strong> <%= @donor_screening.donor_blood_pressure %></p>
+    <p><strong>Temperature (°C):</strong> <%= @donor_screening.donor_temperature %></p>
+    <p><strong>Hematocrit (%):</strong> <%= @donor_screening.hematocrit %></p>
+    <p><strong>Total Protein (g/dL):</strong> <%= @donor_screening.total_protein %></p>
+  </div>
+</div>
+
+<div class="mt-3">
+  <%= link_to "Back to Screenings", donor_screenings_path, class: "btn btn-secondary" %>
+</div>

@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  acceptable_arm_check: false
+  donor_height: 1
+  donor_weight: 1
+  donor_blood_pressure: MyString
+  donor_temperature: 9.99
+  fingerstick: 2025-01-02 16:03:24
+  hematocrit: 9.99
+  total_protein: 9.99
+
+two:
+  acceptable_arm_check: false
+  donor_height: 1
+  donor_weight: 1
+  donor_blood_pressure: MyString
+  donor_temperature: 9.99
+  fingerstick: 2025-01-02 16:03:24
+  hematocrit: 9.99
+  total_protein: 9.99

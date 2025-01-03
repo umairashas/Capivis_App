@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_31_074723) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_02_103324) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,23 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_31_074723) do
     t.index ["user_id"], name: "index_donor_history_questionnaires_on_user_id"
   end
 
+  create_table "donor_screenings", force: :cascade do |t|
+    t.boolean "acceptable_arm_check"
+    t.integer "donor_height"
+    t.integer "donor_weight"
+    t.string "donor_blood_pressure"
+    t.decimal "donor_temperature"
+    t.datetime "fingerstick"
+    t.decimal "hematocrit"
+    t.decimal "total_protein"
+    t.bigint "centre_id", null: false
+    t.bigint "donor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["centre_id"], name: "index_donor_screenings_on_centre_id"
+    t.index ["donor_id"], name: "index_donor_screenings_on_donor_id"
+  end
+
   create_table "donors", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "centre_id"
@@ -70,10 +87,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_31_074723) do
   end
 
   create_table "operators", force: :cascade do |t|
-    t.bigint "centre_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["centre_id"], name: "index_operators_on_centre_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -108,7 +123,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_31_074723) do
   add_foreign_key "donor_history_questionnaires", "donors"
   add_foreign_key "donor_history_questionnaires", "questions"
   add_foreign_key "donor_history_questionnaires", "users"
+  add_foreign_key "donor_screenings", "centres"
+  add_foreign_key "donor_screenings", "donors"
   add_foreign_key "donors", "centres"
   add_foreign_key "donors", "users"
-  add_foreign_key "operators", "centres"
 end

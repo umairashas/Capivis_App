@@ -1,0 +1,39 @@
+<h1 class="text-center my-4">Admin Dashboard</h1>
+
+<p class="text-center mb-4">Welcome, <%= "#{current_user.first_name} #{current_user.last_name}" %>! Manage the application below:</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <%= link_to 'View All Donors', donors_path, class: 'btn btn-info btn-lg' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <%= link_to 'View Questions', admin_dashboard_path(section: 'questions'), class: 'btn btn-secondary btn-lg' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <%= link_to 'View All Centres', centres_path, class: 'btn btn-info btn-lg' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <%= link_to 'View Donor Screenings', admin_dashboard_path(section: 'donor_screenings'), class: 'btn btn-warning btn-lg' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

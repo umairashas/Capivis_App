@@ -47,7 +47,7 @@
   <% end %>
 
 <div class="form-group text-center mt-4">
-  <%= link_to 'Back to Donors', current_user.admin? ? all_donors_questions_path : donors_path, class: 'btn btn-secondary ms-2' %>
+  <%= link_to 'Back to Donors', current_user.admin? ? donors_path : donors_path, class: 'btn btn-secondary ms-2' %>
 </div>
 
 <% else %>

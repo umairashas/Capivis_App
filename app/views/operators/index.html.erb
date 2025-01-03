@@ -1,0 +1,31 @@
+<h1>All Centres</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Pincode</th>
+      <th>Location</th>
+      <th>Phone Number</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @centres.each do |centre| %>
+      <tr>
+        <td><%= centre.name %></td>
+        <td><%= centre.pincode %></td>
+        <td><%= centre.location %></td>
+        <td><%= centre.phone_number %></td>
+        <td>
+          <% if centre.donors.any? %> <!-- Check if the centre has at least one donor -->
+           <%= link_to "View Centre Details", centre_and_donor_details_operator_path(centre), class: 'btn btn-secondary' %>
+
+          <% else %>
+            <p>No donors available</p> <!-- Display a message when there are no donors -->
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

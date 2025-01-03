@@ -9,5 +9,7 @@ class User < ApplicationRecord
  # validates :first_name, :last_name, :email, presence: true
    # validates :aadhar_number, presence: true, length: { is: 12 }, numericality: { only_integer: true }
    enum :role, {:donor=>0, :admin=>1, :operator=>2}
-    
+   def admin?
+    self.role == 'admin'
+  end    
 end

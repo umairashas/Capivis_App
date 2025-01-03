@@ -1,0 +1,104 @@
+<%= form_with(model: @donor, local: true) do |form| %>
+ <% if donor.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(donor.errors.count, "error") %> prohibited this donor from being saved:</h4>
+      <ul>
+        <% donor.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, value: @first_name, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :middle_name %>
+    <%= form.text_field :middle_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, value: @last_name, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :birth_date %>
+    <%= form.date_select :birth_date, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :gender %>
+    <%= form.select :gender, ['Male', 'Female', 'Other'], { include_blank: true }, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :zipcode %>
+    <%= form.text_field :zipcode, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :alternate_phone_number %>
+    <%= form.text_field :alternate_phone_number, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :city %>
+    <%= form.text_field :city, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :state %>
+    <%= form.text_field :state, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :country %>
+    <%= form.text_field :country, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :language %>
+    <%= form.text_field :language, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :address_line1 %>
+    <%= form.text_field :address_line1, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :address_line2 %>
+    <%= form.text_field :address_line2, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :centre_id, "Select Centre" %>
+    <%= form.select :centre_id, Centre.all.collect { |centre| [centre.name, centre.id] }, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :document %>
+    <%= form.text_area :document, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :arrival_datetime %>
+    <%= form.datetime_select :arrival_datetime, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :potential_fraud %>
+    <%= form.text_field :potential_fraud, class: 'form-control' %>
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn btn-success' %>
+<% end %>
