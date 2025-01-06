@@ -13,7 +13,7 @@ class DonorsController < ApplicationController
     @questions = Question.all
     @donor_history_questionnaires = @donor.donor_history_questionnaires.includes(:question)
 
-      # Fetch all questions for the donor history questionnaire
+    # Fetch all questions for the donor history questionnaire
   end
 
   def new
@@ -32,10 +32,10 @@ class DonorsController < ApplicationController
     # Check if the user is an admin or a donor
     if current_user.admin?
       logger.debug "Redirecting admin to donors list..."
-      redirect_to admin_donors_path, notice: 'Donor details were successfully created.'
+      redirect_to admin_donors_path, notice: "Donor details were successfully created."
     else
       logger.debug "Redirecting donor to their dashboard..."
-      redirect_to new_donor_handbook_path, notice: 'Donor details were successfully created. Please review the terms and conditions.'
+      redirect_to new_donor_handbook_path, notice: "Donor details were successfully created. Please review the terms and conditions."
     end
   else
     logger.debug "Errors: #{@donor.errors.full_messages}"
@@ -50,7 +50,7 @@ class DonorsController < ApplicationController
   def update
         @donor=Donor.find(params[:id])
     if @donor.update(donor_params)
-      redirect_to donor_path(@donor), notice: 'Donor details were successfully updated.'
+      redirect_to donor_path(@donor), notice: "Donor details were successfully updated."
     else
       render :edit
     end
@@ -59,7 +59,7 @@ class DonorsController < ApplicationController
   def destroy
         @donor = Donor.find(params[:id])
     @donor.destroy
-    redirect_to donors_path, notice: 'Donor was successfully deleted.'
+    redirect_to donors_path, notice: "Donor was successfully deleted."
   end
 
   private
@@ -71,7 +71,7 @@ class DonorsController < ApplicationController
       :first_name, :middle_name, :last_name, :birth_date, :gender, :zipcode,
       :phone_number, :alternate_phone_number, :city, :state, :country,
       :language, :address_line1, :address_line2, :centre_id, :document, :arrival_datetime,
-      :potential_fraud
+      :potential_fraud, :profile_image
     )
   end
 end

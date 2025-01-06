@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
   # Remove authenticate_user! from the home action
-  before_action :authenticate_user!, only: [:edit, :update, :show]
-
+  before_action :authenticate_user!, only: [ :edit, :update, :show ]
   def home
     # Home page is publicly accessible
   end

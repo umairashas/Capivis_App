@@ -8,24 +8,24 @@ class DonorHistoryQuestionnairesController < ApplicationController
 
   def create
     if params[:donor_history_questionnaire].present? && params[:donor_history_questionnaire][:answers].present?
-    answers = params[:donor_history_questionnaire][:answers]
-    answers.each do |question_id, answer|
-      DonorHistoryQuestionnaire.create!(
+      answers = params[:donor_history_questionnaire][:answers]
+      answers.each do |question_id, answer|
+        DonorHistoryQuestionnaire.create!(
         user_id: current_user.id, # Make sure you have `current_user` defined
         donor_id: current_user.donor.id,
         question_id: question_id,
         answer: answer
-      )
-    end
-    redirect_to donors_path
+        )
+      end
+      UserMailer.questionnaire_submission_confirmation(current_user).deliver_now
+      redirect_to donors_path
     else
-    flash[:alert] = "No answers provided. Please fill out the form."
+      flash[:alert] = "No answers provided. Please fill out the form."
+      redirect_to new_donor_history_questionnaire_path
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    flash[:alert] = "There was an error saving your answers: #{e.message}"
     redirect_to new_donor_history_questionnaire_path
-  end
-rescue ActiveRecord::RecordInvalid => e
-  flash[:alert] = "There was an error saving your answers: #{e.message}"
-  redirect_to new_donor_history_questionnaire_path
-
   end
 
   # def create

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
       root_path
     elsif resource.operator?
       root_path
-    elsif resource.donor? 
+    elsif resource.donor?
       if resource.donor.present?
         # If donor has filled out the form, redirect to the donors path
         root_path
@@ -29,9 +29,9 @@ class ApplicationController < ActionController::Base
   # Permitting the extra fields during sign up, account update, and password reset
   def configure_permitted_parameters
     # Permit additional fields for sign_up
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :role, :aadhar_number])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [ :first_name, :last_name, :role, :aadhar_number ])
 
     # Permit additional fields for account update (if needed)
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :role, :aadhar_number])
+    devise_parameter_sanitizer.permit(:account_update, keys: [ :first_name, :last_name, :role, :aadhar_number ])
   end
 end

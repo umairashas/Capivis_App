@@ -6,6 +6,6 @@ class CreateDonorHistoryQuestionnaires < ActiveRecord::Migration[7.2]
       t.references :question, null: false, foreign_key: true
       t.text :answer
       t.timestamps
-    end        
+    end
   end
 end

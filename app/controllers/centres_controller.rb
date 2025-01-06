@@ -1,14 +1,14 @@
 class CentresController < ApplicationController
-  before_action :set_centre, only: [:edit, :update, :destroy]
+  before_action :set_centre, only: [ :edit, :update, :destroy ]
 
   def index
     @centres = Centre.all
   end
 
-  def show 
+  def show
     @centre = Centre.find(params[:id])
-      @donors = @centre.donors 
-      @donor_count = @donors.count 
+      @donors = @centre.donors
+      @donor_count = @donors.count
   end
 
   def new

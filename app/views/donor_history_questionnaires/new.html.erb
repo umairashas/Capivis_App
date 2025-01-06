@@ -1,8 +1,8 @@
 <%= form_with url: donor_history_questionnaires_path, method: :post, local: true do |form| %>
   <% if @questions.present? %>
-    <% @questions.each do |question| %>
+    <% @questions.each_with_index do |question, index| %>
       <div class="form-group mb-4">
-        <%= form.label "question_#{question.id}", question.text, class: "form-label" %>
+        <%= form.label "question_#{question.id}", "#{index + 1}. #{question.text}", class: "form-label" %>
         
         <% if question.answer_type == "true_false" %>
           <!-- True/False Question -->

@@ -21,7 +21,12 @@
   </p>
     <p><strong>Arrival Date:</strong> <%= @donor.arrival_datetime %></p>
     <p><strong>Potential Fraud:</strong> <%= @donor.potential_fraud %></p>
-    <p><strong>Document:</strong> <%= @donor.document.present? ? "Uploaded" : "Not Uploaded" %></p>
+    <p><strong>Document:</strong> <%= @donor.document.present? ? "Uploaded" : "Not Uploaded" %></p> 
+      <% if @donor.profile_image.attached? %>
+      <%= image_tag @donor.profile_image, style: "width:200px; height:300px" %>
+      <% else %>
+         <p>No profile image uploaded.</p>
+      <% end %>
   </div>
 
   <!-- Blood Donation Terms Section -->

@@ -10,8 +10,8 @@ class Ability
     #   can :read, :all
     #   return unless user.admin?
     #   can :manage, :all
-    if user.present? && user.admin? 
-      can :manage, Question 
+    if user.present? && user.admin?
+      can :manage, Question
     else
       can :read, Question
     end

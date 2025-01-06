@@ -1,19 +1,19 @@
 class Admin::AdminController < ApplicationController
   before_action :authenticate_user! # Ensure the user is logged in
   before_action :ensure_admin # Ensure the user is an admin
-  
+
   def dashboard
     @section = params[:section]
 
     case params[:section]
-    when 'donors'
+    when "donors"
       redirect_to donors_path
-    when 'questions'
+    when "questions"
       redirect_to all_questions_path
-    when 'donor_screenings'
+    when "donor_screenings"
       redirect_to donor_screenings_path
     else
-      render 'admin/dashboard' 
+      render "admin/dashboard"
     end
   end
 
@@ -21,7 +21,7 @@ class Admin::AdminController < ApplicationController
 
   def ensure_admin
     unless current_user.admin? # Assuming you have an `admin?` method in your `User` model
-      redirect_to root_path, alert: 'Access denied. Only admins can access this page.'
+      redirect_to root_path, alert: "Access denied. Only admins can access this page."
     end
   end
 end
