@@ -6,9 +6,9 @@ class OperatorsController < ApplicationController
       @donors = @centre.donors
       @donor_count = @donors.count
    end
-   
+
    def index
-    @centres = Centre.all # or fetch a specific centre if required
+    @centres = Centre.all 
     @operators = Operator.all
   end
 
