@@ -1,35 +1,36 @@
-<h1>All Centres</h1>
+<h1>Donor Physical Exams</h1>
 
-<table class="table">
+<table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Pincode</th>
-      <th>Location</th>
-      <th>Phone Number</th>
+      <th>Flipchart</th>
+      <th>Donor Consents</th>
+      <th>High Risk Questionnaire Score</th>
+      <th>Body Map</th>
+      <th>Physical Exam</th>
+      <th>Centre</th>
+      <th>Donor</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <% @centres.each do |centre| %>
+    <% @donor_physical_exams.each do |exam| %>
       <tr>
-        <td><%= centre.name %></td>
-        <td><%= centre.pincode %></td>
-        <td><%= centre.location %></td>
-        <td><%= centre.phone_number %></td>
+        <td><%= exam.flipchart %></td>
+        <td><%= exam.donor_consents %></td>
+        <td><%= exam.high_risk_questionnaire_score %></td>
+        <td><%= exam.body_map %></td>
+        <td><%= exam.physical_exam %></td>
+        <td><%= exam.centre.name if exam.centre.present? %></td>
+        <td><%= exam.donor.first_name %> <%= exam.donor.last_name %> if exam.donor.present? %></td> <!-- Displaying donor's name -->
         <td>
-          <div style="display: flex; justify-content: space-between;">
-            <%= link_to "Show", centre_path(centre), class: 'btn btn-info' %>
-            <%= link_to "Edit", edit_centre_path(centre), class: 'btn btn-warning' %>
-            <%= button_to "Destroy", centre_path(centre), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>
-          </div>
+          <%= link_to 'Show', donor_physical_exam_path(exam) %> |
+          <%= link_to 'Edit', edit_donor_physical_exam_path(exam) %> |
+          <%= link_to 'Delete', donor_physical_exam_path(exam), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<div style="display: flex; justify-content: space-between; margin-top: 20px;">
-  <%= link_to "Add new", new_centre_path, class: 'btn btn-success' %>
-  <%= link_to "Back", admin_dashboard_path, class: 'btn btn-secondary' %>
-</div>
+<%= link_to 'New Physical Exam', new_donor_physical_exam_path %>

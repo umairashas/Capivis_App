@@ -1,6 +1,7 @@
 class Donor < ApplicationRecord
   belongs_to :user
   belongs_to :centre
+  has_one :donor_physical_exam, dependent: :destroy
   has_one_attached :profile_image
   has_one :donor_screening, dependent: :destroy
   has_many :donor_history_questionnaires, dependent: :destroy
@@ -21,4 +22,7 @@ class Donor < ApplicationRecord
   # validates :document, length: { maximum: 1000 }, allow_nil: true
   # validates :arrival_datetime, presence: true
   # validates :potential_fraud, inclusion: { in: ['Yes', 'No'], message: "%{value} is not a valid option" }, allow_nil: true
+  def full_name
+    "#{first_name} #{middle_name} #{last_name}".strip
+  end
 end

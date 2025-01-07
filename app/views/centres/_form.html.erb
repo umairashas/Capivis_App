@@ -1,26 +1,52 @@
-<%= form_with model: @centre, local: true do |form| %>
+<%= form_with(model: donor_physical_exam, local: true) do |form| %>
+  <% if donor_physical_exam.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(donor_physical_exam.errors.count, "error") %> prohibited this donor_physical_exam from being saved:</h2>
+
+      <ul>
+        <% donor_physical_exam.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="form-group">
-    <%= form.label :name, "Name" %>
-    <%= form.text_field :name, class: 'form-control', required: true %>
+    <%= form.label :flipchart %>
+    <%= form.check_box :flipchart %>
   </div>
 
   <div class="form-group">
-    <%= form.label :pincode, "Pincode" %>
-    <%= form.number_field :pincode, class: 'form-control', required: true %>
+    <%= form.label :donor_consents %>
+    <%= form.check_box :donor_consents %>
   </div>
 
   <div class="form-group">
-    <%= form.label :location, "Location" %>
-    <%= form.text_field :location, class: 'form-control', required: true %>
+    <%= form.label :high_risk_questionnaire_score %>
+    <%= form.number_field :high_risk_questionnaire_score %>
   </div>
 
   <div class="form-group">
-    <%= form.label :phone_number, "Phone Number" %>
-    <%= form.telephone_field :phone_number, class: 'form-control', required: true %>
+    <%= form.label :body_map %>
+    <%= form.text_area :body_map %>
   </div>
 
   <div class="form-group">
-    <%= form.submit @centre.new_record? ? 'Create Centre' : 'Update Centre', class: 'btn btn-primary' %>
-    <%= link_to 'Cancel', centres_path, class: 'btn btn-secondary' %>
+    <%= form.label :physical_exam %>
+    <%= form.text_area :physical_exam %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :centre_id, "Centre" %>
+    <%= form.collection_select :centre_id, Centre.all, :id, :name, include_blank: true, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :donor_id, "Donor" %>
+    <%= form.collection_select :donor_id, Donor.all, :id, :first_name, include_blank: true, class: 'form-control' %> <!-- Showing donor's first name instead of full name -->
+  </div>
+
+  <div class="form-group">
+    <%= form.submit %>
   </div>
 <% end %>

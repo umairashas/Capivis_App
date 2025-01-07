@@ -1,0 +1,32 @@
+<h1>Donor Physical Exams</h1>
+
+<%= link_to 'New Physical Exam', new_donor_physical_exam_path, class: 'btn btn-primary' %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Flipchart</th>
+      <th>Donor Consents</th>
+      <th>High Risk Questionnaire Score</th>
+      <th>Body Map</th>
+      <th>Physical Exam</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @donor_physical_exams.each do |exam| %>
+      <tr>
+        <td><%= exam.flipchart? ? 'Yes' : 'No' %></td>
+        <td><%= exam.donor_consents? ? 'Yes' : 'No' %></td>
+        <td><%= exam.high_risk_questionnaire_score %></td>
+        <td><%= exam.body_map.present? ? 'Available' : 'Not Available' %></td>
+        <td><%= exam.physical_exam? ? 'Yes' : 'No' %></td>
+        <td>
+          <%= link_to 'Show', donor_physical_exam_path(exam), class: 'btn btn-info' %>
+          <%= link_to 'Edit', edit_donor_physical_exam_path(exam), class: 'btn btn-warning' %>
+          <%= link_to 'Delete', donor_physical_exam_path(exam), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,42 +1,8 @@
-<h1>Centre Details</h1>
+<h1>Donor Physical Exam</h1>
 
-<div class="centre-details container">
-  <p><strong>Name:</strong> <%= @centre.name %></p>
-  <p><strong>Pincode:</strong> <%= @centre.pincode %></p>
-  <p><strong>Location:</strong> <%= @centre.location %></p>
-  <p><strong>Phone Number:</strong> <%= @centre.phone_number %></p>
-</div>
-
-<h3>Donor Profile</h3>
-
-<p><strong>Total Donors:</strong> <%= @donor_count %></p>
-
-<% if @donors.any? %>
-  <h4>List of Donors</h4>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Phone Number</th>
-        <th>City</th>
-        <th>State</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @donors.each do |donor| %>
-        <tr>
-          <td><%= donor.first_name %> <%= donor.last_name %></td>
-          <td><%= donor.phone_number %></td>
-          <td><%= donor.city %></td>
-          <td><%= donor.state %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>No donors have been associated with this centre yet.</p>
-<% end %>
-
-<div class="form-group text-center mt-4">
-  <%= link_to 'Back to Centres', centres_path, class: 'btn btn-secondary ms-2' %>
-</div>
+<p><strong>Physical Exam:</strong> <%= @donor_physical_exam.physical_exam %></p>
+<p><strong>Centre:</strong> <%= @donor_physical_exam.centre.name if @donor_physical_exam.centre.present? %></p>
+<p><strong>Donor:</strong> <%= @donor_physical_exam.donor.first_name %> <%= @donor_physical_exam.donor.last_name %> if @donor_physical_exam.donor.present? %></p>
+<!-- Removed operator field completely -->
+<%= link_to 'Edit', edit_donor_physical_exam_path(@donor_physical_exam) %> |
+<%= link_to 'Back', donor_physical_exams_path %>

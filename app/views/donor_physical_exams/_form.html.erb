@@ -1,0 +1,46 @@
+<%= form_with(model: @donor_physical_exam, local: true) do |form| %>
+  <% if @donor_physical_exam.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@donor_physical_exam.errors.count, "error") %> prohibited this exam from being saved:</h2>
+      <ul>
+        <% @donor_physical_exam.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :flipchart %>
+    <%= form.check_box :flipchart %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :donor_consents %>
+    <%= form.check_box :donor_consents %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :high_risk_questionnaire_score %>
+    <%= form.number_field :high_risk_questionnaire_score, class: 'form-control', step: 1 %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :body_map %>
+    <%= form.text_area :body_map, class: 'form-control', rows: 5 %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :physical_exam %>
+    <%= form.check_box :physical_exam %>
+  </div>
+
+  <!-- Hidden fields for donor_id, centre_id, and donor_screening_id -->
+  <%= form.hidden_field :donor_id, value: @donor_id %>
+  <%= form.hidden_field :centre_id, value: @centre_id %>
+  <%= form.hidden_field :donor_screening_id, value: @donor_screening_id %>
+
+  <div class="form-group">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

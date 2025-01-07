@@ -1,2 +1,3 @@
 class Operator < ApplicationRecord
+  belongs_to :user
 end

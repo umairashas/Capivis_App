@@ -61,3 +61,5 @@ gem "devise"
 gem "rename"
 gem "cancancan"
 gem "pg"
+gem 'hirb'
+

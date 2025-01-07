@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_06_071455) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_07_071352) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_06_071455) do
     t.index ["user_id"], name: "index_donor_history_questionnaires_on_user_id"
   end
 
+  create_table "donor_physical_exams", force: :cascade do |t|
+    t.boolean "flipchart"
+    t.boolean "donor_consents"
+    t.text "body_map"
+    t.integer "high_risk_questionnaire_score"
+    t.boolean "physical_exam"
+    t.bigint "donor_id", null: false
+    t.bigint "centre_id", null: false
+    t.bigint "donor_screening_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["centre_id"], name: "index_donor_physical_exams_on_centre_id"
+    t.index ["donor_id"], name: "index_donor_physical_exams_on_donor_id"
+    t.index ["donor_screening_id"], name: "index_donor_physical_exams_on_donor_screening_id"
+  end
+
   create_table "donor_screenings", force: :cascade do |t|
     t.boolean "acceptable_arm_check"
     t.integer "donor_height"
@@ -115,8 +131,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_06_071455) do
   end
 
   create_table "operators", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_operators_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -153,8 +171,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_06_071455) do
   add_foreign_key "donor_history_questionnaires", "donors"
   add_foreign_key "donor_history_questionnaires", "questions"
   add_foreign_key "donor_history_questionnaires", "users"
+  add_foreign_key "donor_physical_exams", "centres"
+  add_foreign_key "donor_physical_exams", "donor_screenings"
+  add_foreign_key "donor_physical_exams", "donors"
   add_foreign_key "donor_screenings", "centres"
   add_foreign_key "donor_screenings", "donors"
   add_foreign_key "donors", "centres"
   add_foreign_key "donors", "users"
+  add_foreign_key "operators", "users"
 end

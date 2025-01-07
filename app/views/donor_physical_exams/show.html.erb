@@ -1,0 +1,25 @@
+<h1>Donor Physical Exam Details</h1>
+
+<p>
+  <strong>Flipchart:</strong>
+  <%= @donor_physical_exam.flipchart? ? 'Yes' : 'No' %>
+</p>
+<p>
+  <strong>Donor Consents:</strong>
+  <%= @donor_physical_exam.donor_consents? ? 'Yes' : 'No' %>
+</p>
+<p>
+  <strong>High Risk Questionnaire Score:</strong>
+  <%= @donor_physical_exam.high_risk_questionnaire_score %>
+</p>
+<p>
+  <strong>Body Map:</strong>
+  <%= @donor_physical_exam.body_map.present? ? 'Available' : 'Not Available' %>
+</p>
+<p>
+  <strong>Physical Exam:</strong>
+  <%= @donor_physical_exam.physical_exam? ? 'Yes' : 'No' %>
+</p>
+
+<%= link_to 'Edit', edit_donor_physical_exam_path(@donor_physical_exam), class: 'btn btn-warning' %>
+<%= link_to 'Back to List', donor_physical_exams_path, class: 'btn btn-secondary' %>

@@ -1,4 +1,5 @@
   Rails.application.routes.draw do
+    resources :donor_physical_exams
     resources :donor_screenings
     resources :centres
     resources :donors

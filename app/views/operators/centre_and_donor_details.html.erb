@@ -11,45 +11,49 @@
 
 <% if @donors.any? %>
   <table class="table">
-    <thead>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone Number</th>
+      <th>Screening Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @donors.each do |donor| %>
       <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Phone Number</th>
-        <th>Screening Status</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @donors.each do |donor| %>
-        <tr>
-          <td><%= donor.first_name %></td>
-          <td><%= donor.last_name %></td>
-          <td><%= donor.phone_number %></td>
-          <td>
-            <% screening = donor.donor_screening %>
-            <% if screening %> <!-- Check if screening exists for this donor -->
-              <%= screening.created_at.present? ? 'Completed' : 'Pending' %>
-            <% else %>
-              Pending
-            <% end %>
-          </td>
-          <td>
-            <% if screening.nil? || screening.created_at.blank? %> 
-              <!-- Show button only if screening is not completed yet -->
+        <td><%= donor.first_name %></td>
+        <td><%= donor.last_name %></td>
+        <td><%= donor.phone_number %></td>
+        <td>
+          <% screening = donor.donor_screening %>
+          <% if screening %>
+            <%= screening.created_at.present? ? 'Completed' : 'Pending' %>
+          <% else %>
+            Pending
+          <% end %>
+        </td>
+        <td>
+          <% if screening.nil? || screening.created_at.blank? %>
             <%= link_to "Screening", new_donor_screening_path(donor_id: donor.id, centre_id: @centre.id), class: 'btn btn-secondary' %>
+          <% else %>
+            <span class="btn btn-success disabled">Screening Completed</span>
+            <%= link_to "Show Screening", donor_screening_path(screening), class: "btn btn-warning btn-sm" %>
 
-
+            <% if donor.donor_physical_exam.nil? %>
+              <%= link_to "Physical Exam", new_donor_physical_exam_path(donor_id: donor.id, centre_id: @centre.id, donor_screening_id: donor.donor_screening.id), class: "btn btn-primary btn-sm" %>
             <% else %>
-              <!-- No action if screening is already completed -->
-              <span class="btn btn-success disabled">Screening Completed</span>
-               <%= link_to "Show", donor_screening_path, class: "btn btn-warning btn-sm" %>
+              <span class="btn btn-success disabled">Physical Exam Completed</span>
+              <%= link_to "Show Exam", donor_physical_exam_path(donor.donor_physical_exam), class: "btn btn-info btn-sm" %>
             <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <% else %>
   <p>No donors associated with this centre.</p>
 <% end %>
