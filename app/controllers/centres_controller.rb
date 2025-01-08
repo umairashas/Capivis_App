@@ -9,16 +9,18 @@ class CentresController < ApplicationController
     @centre = Centre.find(params[:id])
       @donors = @centre.donors
       @donor_count = @donors.count
+      @operator = @centre.operator
   end
 
   def new
     @centre = Centre.new
+    @operator = current_user.operator
   end
 
   def create
+    debugger
+    @operator = current_user.operator
     @centre = Centre.new(centre_params)
-    @centre.user = current_user # Assign the current logged-in user as the owner
-
     if @centre.save
       redirect_to centres_path, notice: "Centre added successfully!"
     else
@@ -55,6 +57,6 @@ class CentresController < ApplicationController
   end
 
   def centre_params
-    params.require(:centre).permit(:name, :pincode, :location, :phone_number)
+    params.require(:centre).permit(:name, :pincode, :location, :phone_number, :operator_id)
   end
 end

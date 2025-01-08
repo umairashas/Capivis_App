@@ -6,11 +6,19 @@ class User < ApplicationRecord
   has_one :donor, dependent: :destroy
   has_one :operator, dependent: :destroy
   has_many :donor_history_questionnaire, dependent: :destroy
-  has_many :centres, dependent: :destroy
    # validates :first_name, :last_name, :email, presence: true
    # validates :aadhar_number, presence: true, length: { is: 12 }, numericality: { only_integer: true }
    enum :role, { donor: 0, admin: 1, operator: 2 }
-   def admin?
+  after_create :create_operator_if_operator_role
+
+  def admin?
     self.role == "admin"
+  end
+
+  private
+
+  def create_operator_if_operator_role
+    # Create the operator only if the user has the 'operator' role and no operator exists yet
+    create_operator! if role == "operator" 
   end
 end

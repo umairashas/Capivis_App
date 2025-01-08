@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_07_071352) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_08_170805) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,8 +48,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_07_071352) do
     t.string "location"
     t.string "phone_number"
     t.bigint "user_id", null: false
+    t.bigint "operator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["operator_id"], name: "index_centres_on_operator_id"
     t.index ["user_id"], name: "index_centres_on_user_id"
   end
 
@@ -171,12 +173,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_07_071352) do
   add_foreign_key "donor_history_questionnaires", "donors"
   add_foreign_key "donor_history_questionnaires", "questions"
   add_foreign_key "donor_history_questionnaires", "users"
-  add_foreign_key "donor_physical_exams", "centres"
   add_foreign_key "donor_physical_exams", "donor_screenings"
   add_foreign_key "donor_physical_exams", "donors"
-  add_foreign_key "donor_screenings", "centres"
   add_foreign_key "donor_screenings", "donors"
-  add_foreign_key "donors", "centres"
   add_foreign_key "donors", "users"
   add_foreign_key "operators", "users"
 end

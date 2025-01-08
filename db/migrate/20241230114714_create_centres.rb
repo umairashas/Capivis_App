@@ -6,6 +6,7 @@ class CreateCentres < ActiveRecord::Migration[7.2]
       t.string :location
       t.string :phone_number
       t.references :user, null: false, foreign_key: true
+      t.references :operator, null: false, foreign_key: true
       t.timestamps
     end
   end
