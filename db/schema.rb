@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_08_170805) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_09_063117) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,30 +47,26 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_08_170805) do
     t.string "pincode"
     t.string "location"
     t.string "phone_number"
-    t.bigint "user_id", null: false
-    t.bigint "operator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["operator_id"], name: "index_centres_on_operator_id"
-    t.index ["user_id"], name: "index_centres_on_user_id"
   end
 
   create_table "donor_handbooks", force: :cascade do |t|
     t.boolean "terms_accepted"
+    t.bigint "donor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["donor_id"], name: "index_donor_handbooks_on_donor_id"
   end
 
   create_table "donor_history_questionnaires", force: :cascade do |t|
     t.bigint "donor_id", null: false
-    t.bigint "user_id", null: false
     t.bigint "question_id", null: false
     t.text "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["donor_id"], name: "index_donor_history_questionnaires_on_donor_id"
     t.index ["question_id"], name: "index_donor_history_questionnaires_on_question_id"
-    t.index ["user_id"], name: "index_donor_history_questionnaires_on_user_id"
   end
 
   create_table "donor_physical_exams", force: :cascade do |t|
@@ -82,11 +78,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_08_170805) do
     t.bigint "donor_id", null: false
     t.bigint "centre_id", null: false
     t.bigint "donor_screening_id", null: false
+    t.bigint "operator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["centre_id"], name: "index_donor_physical_exams_on_centre_id"
     t.index ["donor_id"], name: "index_donor_physical_exams_on_donor_id"
     t.index ["donor_screening_id"], name: "index_donor_physical_exams_on_donor_screening_id"
+    t.index ["operator_id"], name: "index_donor_physical_exams_on_operator_id"
   end
 
   create_table "donor_screenings", force: :cascade do |t|
@@ -100,15 +98,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_08_170805) do
     t.decimal "total_protein"
     t.bigint "centre_id", null: false
     t.bigint "donor_id", null: false
+    t.bigint "operator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["centre_id"], name: "index_donor_screenings_on_centre_id"
     t.index ["donor_id"], name: "index_donor_screenings_on_donor_id"
+    t.index ["operator_id"], name: "index_donor_screenings_on_operator_id"
   end
 
   create_table "donors", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "centre_id"
+    t.bigint "user_id", null: false
+    t.bigint "centre_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "first_name"
@@ -154,28 +154,31 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_08_170805) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.integer "role", default: 0
-    t.string "aadhar_number"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "role", default: 0
+    t.string "aadhar_number"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "centres", "users"
+  add_foreign_key "donor_handbooks", "donors"
   add_foreign_key "donor_history_questionnaires", "donors"
   add_foreign_key "donor_history_questionnaires", "questions"
-  add_foreign_key "donor_history_questionnaires", "users"
+  add_foreign_key "donor_physical_exams", "centres"
   add_foreign_key "donor_physical_exams", "donor_screenings"
   add_foreign_key "donor_physical_exams", "donors"
+  add_foreign_key "donor_physical_exams", "operators"
+  add_foreign_key "donor_screenings", "centres"
   add_foreign_key "donor_screenings", "donors"
+  add_foreign_key "donor_screenings", "operators"
   add_foreign_key "donors", "users"
   add_foreign_key "operators", "users"
 end

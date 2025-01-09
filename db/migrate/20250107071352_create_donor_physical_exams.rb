@@ -9,6 +9,7 @@ class CreateDonorPhysicalExams < ActiveRecord::Migration[7.2]
       t.references :donor, null: false, foreign_key: true
       t.references :centre, null:false, foreign_key: true  
       t.references :donor_screening, null:false, foreign_key: true  
+      t.references :operator, null:false, foreign_key: true  
       t.timestamps
     end
   end

@@ -8,6 +8,7 @@ class DonorScreeningsController < ApplicationController
     @donor_screening = DonorScreening.new
     @donor = Donor.find(params[:donor_id])
     @centre = Centre.find(params[:centre_id])
+    @operator = Operator.find(params[:operator_id])
   end
 
   def show
@@ -19,6 +20,9 @@ class DonorScreeningsController < ApplicationController
   end
 
   def create
+    @donor = Donor.find(params[:donor_screening][:donor_id])
+    @centre = Centre.find(params[:donor_screening][:centre_id])
+    @operator = Operator.find(params[:donor_screening][:operator_id])
     @donor_screening = DonorScreening.new(donor_screening_params)
      if @donor_screening.save
       UserMailer.screening_completed_email(@donor_screening.donor).deliver_now
@@ -52,6 +56,6 @@ class DonorScreeningsController < ApplicationController
   private
 
   def donor_screening_params
-    params.require(:donor_screening).permit(:acceptable_arm_check, :donor_height, :donor_weight, :donor_blood_pressure, :donor_temperature, :fingerstick, :hematocrit, :total_protein, :donor_id, :centre_id)
+    params.require(:donor_screening).permit(:acceptable_arm_check, :donor_height, :donor_weight, :donor_blood_pressure, :donor_temperature, :fingerstick, :hematocrit, :total_protein, :donor_id, :centre_id, :operator_id)
   end
 end

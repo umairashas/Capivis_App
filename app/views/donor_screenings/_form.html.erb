@@ -1,16 +1,8 @@
 <!-- views/donor_screenings/_form.html.erb -->
 <%= form_with model: @donor_screening, local: true do |form| %>
   <!-- Display Donor Name -->
-  <div class="form-group">
-    <%= form.label :donor_name, "Donor" %>
-    <%= form.text_field :donor_name, value: @donor.first_name + " " + @donor.last_name, class: 'form-control', disabled: true %>
-  </div>
   
   <!-- Display Centre Name -->
-  <div class="form-group">
-    <%= form.label :centre_name, "Centre" %>
-    <%= form.text_field :centre_name, value: @centre.name, class: 'form-control', disabled: true %>
-  </div>
   
   <!-- Acceptable Arm Check -->
   <div class="form-group">
@@ -54,8 +46,10 @@
   </div>
 
   <!-- Hidden fields for Centre and Donor IDs -->
-  <%= form.hidden_field :centre_id, value: @centre.id %>
-  <%= form.hidden_field :donor_id, value: @donor.id %>
+  <%= form.hidden_field :centre_id, value: params[:centre_id] %>
+  <%= form.hidden_field :donor_id, value: params[:donor_id] %>
+  <%= form.hidden_field :operator_id, value: params[:operator_id] %>
+
 
   <div class="form-group mt-3">
     <%= form.submit class: "btn btn-primary" %>

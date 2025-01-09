@@ -35,7 +35,7 @@ class DonorsController < ApplicationController
       redirect_to admin_donors_path, notice: "Donor details were successfully created."
     else
       logger.debug "Redirecting donor to their dashboard..."
-      redirect_to new_donor_handbook_path, notice: "Donor details were successfully created. Please review the terms and conditions."
+      redirect_to new_donor_handbook_path(donor_id: @donor.id), notice: "Donor details were successfully created. Please review the terms and conditions."
     end
   else
     logger.debug "Errors: #{@donor.errors.full_messages}"

@@ -6,10 +6,10 @@ class CentresController < ApplicationController
   end
 
   def show
-    @centre = Centre.find(params[:id])
+      @centre = Centre.find(params[:id])
       @donors = @centre.donors
       @donor_count = @donors.count
-      @operator = @centre.operator
+   
   end
 
   def new
@@ -18,14 +18,11 @@ class CentresController < ApplicationController
   end
 
   def create
-    debugger
-    @operator = current_user.operator
     @centre = Centre.new(centre_params)
     if @centre.save
-      redirect_to centres_path, notice: "Centre added successfully!"
+      redirect_to centres_path, notice: 'Centre created successfully.'
     else
-      Rails.logger.debug("Save failed: #{@centre.errors.full_messages}")
-      render :new, alert: "Error adding Centre."
+      render :new
     end
   end
 
@@ -57,6 +54,6 @@ class CentresController < ApplicationController
   end
 
   def centre_params
-    params.require(:centre).permit(:name, :pincode, :location, :phone_number, :operator_id)
+    params.require(:centre).permit(:name, :pincode, :location, :phone_number)
   end
 end

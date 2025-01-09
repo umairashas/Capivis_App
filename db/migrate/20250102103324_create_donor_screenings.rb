@@ -11,6 +11,7 @@ class CreateDonorScreenings < ActiveRecord::Migration[7.2]
       t.decimal :total_protein
       t.references :centre, null: false, foreign_key: true
       t.references :donor, null: false, foreign_key: true
+      t.references :operator, null: false, foreign_key: true
       t.timestamps
     end
   end

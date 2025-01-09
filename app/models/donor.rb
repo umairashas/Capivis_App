@@ -2,6 +2,7 @@ class Donor < ApplicationRecord
   belongs_to :user
   belongs_to :centre
   has_one :donor_physical_exam, dependent: :destroy
+  has_one :donor_handbook, dependent: :destroy
   has_one_attached :profile_image
   has_one :donor_screening, dependent: :destroy
   has_many :donor_history_questionnaires, dependent: :destroy
