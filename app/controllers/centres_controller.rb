@@ -6,6 +6,7 @@ class CentresController < ApplicationController
   end
 
   def show
+      authorize! :read, @centre
       @centre = Centre.find(params[:id])
       @donors = @centre.donors
       @donor_count = @donors.count

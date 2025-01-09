@@ -46,9 +46,10 @@
   </div>
 
   <!-- Hidden fields for Centre and Donor IDs -->
+
   <%= form.hidden_field :centre_id, value: params[:centre_id] %>
   <%= form.hidden_field :donor_id, value: params[:donor_id] %>
-  <%= form.hidden_field :operator_id, value: params[:operator_id] %>
+  <%= form.hidden_field :operator_id, value: current_user.operator.id %>
 
 
   <div class="form-group mt-3">

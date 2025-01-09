@@ -17,10 +17,14 @@
       end
       
       def create
-
+        @donor = Donor.find(params[:donor_physical_exam][:donor_id])
+        @centre = Centre.find(params[:donor_physical_exam][:centre_id])
+        @operator = current_user.operator.id
+        @donor_screening = DonorScreening.find(params[:donor_physical_exam][:donor_screening_id])
         @donor_physical_exam = DonorPhysicalExam.new(donor_physical_exam_params)
         
         if @donor_physical_exam.save
+          UserMailer.physical_exam_completed(@donor).deliver_now
           redirect_to donor_physical_exams_path, notice: "Successfully completed the Physical Exam"
         else
           render :new, status: :unprocessable_entity
@@ -59,7 +63,8 @@
                  :physical_exam,
                  :donor_id,
                  :centre_id,
-                 :donor_screening_id
+                 :donor_screening_id,
+                 :operator_id
                  )
       end
     end

@@ -13,14 +13,12 @@ class User < ApplicationRecord
     self.role == "admin"
   end
 
-  after_create :create_operator_if_operator_role
+ after_create :create_operator_if_needed
 
-  private
+private
 
-  def create_operator_if_operator_role
-    return unless role == 'operator'
-
-    Operator.create(user: self)
-  end
+def create_operator_if_needed
+  create_operator if role == 'operator' && operator.nil?
+end
 
 end

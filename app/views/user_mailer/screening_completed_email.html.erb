@@ -1,5 +1,8 @@
-<h1>Dear <%= @donor.first_name %> <%= @donor.last_name %>,</h1>
+  <h1 style="color: #2c3e50;">Dear <%= @donor.first_name %> <%= @donor.last_name %>,</h1>
 <p>Your screening has been successfully completed. Thank you for your participation!</p>
+
+<p>Please come to the donor centre for the physical checkup on <strong><%= 1.week.from_now.to_date.strftime('%A, %B %d, %Y') %></strong>.</p>
+
 <p>If you have any questions or concerns, feel free to contact us.</p>
 <p>Best regards,</p>
 <p>The Capivis Team</p>

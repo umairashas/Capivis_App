@@ -36,9 +36,10 @@
   </div>
 
   <!-- Hidden fields for donor_id, centre_id, and donor_screening_id -->
-  <%= form.hidden_field :donor_id, value: @donor_id %>
-  <%= form.hidden_field :centre_id, value: @centre_id %>
-  <%= form.hidden_field :donor_screening_id, value: @donor_screening_id %>
+  <%= form.hidden_field :centre_id, value: params[:centre_id] %>
+  <%= form.hidden_field :donor_id, value: params[:donor_id] %>
+  <%= form.hidden_field :donor_screening_id, value: params[:donor_screening_id] %>
+  <%= form.hidden_field :operator_id, value: current_user.operator.id %>
 
   <div class="form-group">
     <%= form.submit class: 'btn btn-primary' %>

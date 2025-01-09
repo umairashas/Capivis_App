@@ -7,8 +7,7 @@ class DonorScreeningsController < ApplicationController
   def new
     @donor_screening = DonorScreening.new
     @donor = Donor.find(params[:donor_id])
-    @centre = Centre.find(params[:centre_id])
-    @operator = Operator.find(params[:operator_id])
+    
   end
 
   def show
@@ -22,7 +21,7 @@ class DonorScreeningsController < ApplicationController
   def create
     @donor = Donor.find(params[:donor_screening][:donor_id])
     @centre = Centre.find(params[:donor_screening][:centre_id])
-    @operator = Operator.find(params[:donor_screening][:operator_id])
+    @operator = current_user.operator.id
     @donor_screening = DonorScreening.new(donor_screening_params)
      if @donor_screening.save
       UserMailer.screening_completed_email(@donor_screening.donor).deliver_now
@@ -40,6 +39,9 @@ class DonorScreeningsController < ApplicationController
 
   def update
     @donor_screening = DonorScreening.find(params[:id])
+     @donor = Donor.find(params[:donor_screening][:donor_id])
+    @centre = Centre.find(params[:donor_screening][:centre_id])
+    @operator = current_user.operator.id
     if @donor_screening.update(donor_screening_params)
       redirect_to donor_screenings_path, notice: "DonorScreening has been updated successfully"
     else

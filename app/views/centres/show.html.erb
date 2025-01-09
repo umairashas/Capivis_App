@@ -1,15 +1,22 @@
+
 <h1><%= @centre.name %></h1>
 
 <p><strong>Pincode:</strong> <%= @centre.pincode %></p>
 <p><strong>Location:</strong> <%= @centre.location %></p>
 <p><strong>Phone Number:</strong> <%= @centre.phone_number %></p>
 <p><strong>Total Donors:</strong> <%= @donor_count %></p>
-
-<h2>Donors</h2>
+<h2><p><strong>Total Donors:</strong> <%= @donor_count %></p></h2>
+<h4>Associated Donors</h4>
 <% if @donors.any? %>
   <ul>
     <% @donors.each do |donor| %>
-      <li><%= donor.name %> - <%= donor.email %></li>
+        <p><strong>Donor Name:</strong> <%= donor.name %></p>
+        <p><strong>Gender:</strong> <%= donor.gender %></p>
+        <p><strong>Birth Date:</strong> <%= donor.birth_date %></p>
+        <p><strong>Phone Number:</strong> <%= donor.phone_number %></p>
+        <p><strong>Address:</strong> <%= donor.address_line1 %></p>
+        <p><strong>City:</strong> <%= donor.city %></p>
+        
     <% end %>
   </ul>
 <% else %>

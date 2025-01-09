@@ -23,7 +23,7 @@ class Donor < ApplicationRecord
   # validates :document, length: { maximum: 1000 }, allow_nil: true
   # validates :arrival_datetime, presence: true
   # validates :potential_fraud, inclusion: { in: ['Yes', 'No'], message: "%{value} is not a valid option" }, allow_nil: true
-  def full_name
-    "#{first_name} #{middle_name} #{last_name}".strip
+  def name
+    [first_name, middle_name, last_name].reject(&:blank?).join(' ')
   end
 end

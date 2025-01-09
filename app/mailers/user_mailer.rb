@@ -1,8 +1,8 @@
 class UserMailer < ApplicationMailer
-   def welcome_email(user)
+    def welcome_email(user)
        @user = user
        mail(to: @user.email, subject: "Welcome to Capivis App!")
-     end
+    end
 
      def questionnaire_submission_confirmation(user)
        @user = user
@@ -12,5 +12,11 @@ class UserMailer < ApplicationMailer
      def screening_completed_email(donor)
        @donor = donor
        mail(to: @donor.user.email, subject: "Your Screening is Complete")
+     end 
+
+     def physical_exam_completed(donor)
+      @donor = donor
+      mail(to: @donor.user.email, subject: "Your Screening is Complete")
      end
+
 end

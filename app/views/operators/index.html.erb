@@ -1,3 +1,6 @@
+<%= link_to "View All Screenings", donor_screenings_path, class: 'btn btn-success' %>
+<%= link_to "View All Donor Physical Exam", donor_physical_exams_path, class: 'btn btn-success' %>
+
 <h1>All Centres</h1>
 
 <table class="table">
@@ -19,7 +22,7 @@
         <td><%= centre.phone_number %></td>
         <td>
           <% if centre.donors.any? %> <!-- Check if the centre has at least one donor -->
-           <%= link_to "View Centre Details", centre_and_donor_details_operator_path(centre), class: 'btn btn-secondary' %>
+           <%= link_to "View Associated Donors", centre_and_donor_details_operator_path(centre), class: 'btn btn-secondary' %>
 
           <% else %>
             <p>No donors available</p> <!-- Display a message when there are no donors -->
