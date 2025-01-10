@@ -1,6 +1,7 @@
 <h1>Donor Physical Exams</h1>
 
-<%= link_to 'New Physical Exam', new_donor_physical_exam_path, class: 'btn btn-primary' %>
+<%# <%= link_to 'New Physical Exam', new_donor_physical_exam_path, class: 'btn btn-primary' %> 
+<%= link_to 'Back', :back, class: 'btn btn-primary' %> 
 
 <table class="table">
   <thead>
@@ -23,8 +24,12 @@
         <td><%= exam.physical_exam? ? 'Yes' : 'No' %></td>
         <td>
           <%= link_to 'Show', donor_physical_exam_path(exam), class: 'btn btn-info' %>
-          <%= link_to 'Edit', edit_donor_physical_exam_path(exam), class: 'btn btn-warning' %>
+          <% if current_user.operator? %>
+             <%= link_to 'Edit', edit_donor_physical_exam_path(exam), class: 'btn btn-warning' %>
+          <% end %>
+          <% if current_user.admin? %>
           <%= link_to 'Delete', donor_physical_exam_path(exam), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <% end %>
         </td>
       </tr>
     <% end %>

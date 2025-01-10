@@ -1,26 +1,114 @@
-<h1>Contact Us</h1>
+<div class="contact-container">
+  <h1 class="contact-header">Contact Us</h1>
+  <% if user_signed_in? %>  
+    <%= form_with(url: contact_path, method: :post, local: true, class: "contact-form") do |form| %>
+      <div class="form-group">
+        <%= form.label :name, "Your Name", class: "form-label" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
 
-<% if user_signed_in? %>  
-  <%= form_with(url: contact_path, method: :post, local: true) do |form| %>
-    <div class="form-group">
-      <%= form.label :name, "Your Name" %>
-      <%= form.text_field :name, class: "form-control" %>
-    </div>
+      <div class="form-group">
+        <%= form.label :email, "Your Email", class: "form-label" %>
+        <%= form.email_field :email, class: "form-control" %>
+      </div>
 
-    <div class="form-group">
-      <%= form.label :email, "Your Email" %>
-      <%= form.email_field :email, class: "form-control" %>
-    </div>
+      <div class="form-group">
+        <%= form.label :message, "Your Message", class: "form-label" %>
+        <%= form.text_area :message, class: "form-control", rows: 3 %>
+      </div>
 
-    <div class="form-group">
-      <%= form.label :message, "Your Message" %>
-      <%= form.text_area :message, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.submit "Send Message", class: "btn btn-primary" %>
-    </div>
+      <div class="form-group">
+        <%= form.submit "Send Message", class: "btn btn-primary btn-submit" %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="login-message">Please <%= link_to 'log in', new_user_session_path, class: "login-link" %> to send a message.</p>
   <% end %>
-<% else %>
-  <p>Please <%= link_to 'log in', new_user_session_path %> to send a message.</p>
-<% end %>
+</div>
+
+<style>
+  :root {
+    --primary-bg: #1a1a2e;
+    --primary-text: #ffffff;
+    --secondary-text: #cccccc;
+    --accent-color: #0f3460;
+    --btn-bg: #533483;
+    --btn-hover: #342f5c;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    margin: 0;
+    padding: 0;
+  }
+
+  .contact-header {
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 2rem;
+    color: white;
+  }
+
+  .contact-container {
+    width: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    top: -10%;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--primary-text);
+    background-color: var(--btn-bg);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-submit:hover {
+    background-color: var(--btn-hover);
+  }
+
+  .login-message {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+  }
+
+  .login-link {
+    color: skyblue;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .login-link:hover {
+    text-decoration: underline;
+  }
+</style>

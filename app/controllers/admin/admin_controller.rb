@@ -12,6 +12,8 @@ class Admin::AdminController < ApplicationController
       redirect_to all_questions_path
     when "donor_screenings"
       redirect_to donor_screenings_path
+    when "donor_physical_exams"
+      redirect_to donor_physical_exams_path
     else
       render "admin/dashboard"
     end

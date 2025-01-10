@@ -34,8 +34,9 @@
           <% if current_user.operator? %>  <!-- Show button only if the user is an operator -->
                <%= link_to "Edit", edit_donor_screening_path(screening), class: "btn btn-warning btn-sm" %>
           <% end %>
-
+          <% if current_user.admin? %>
           <%= button_to "Delete", donor_screening_path(screening), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+          <% end %>
         </td>
       </tr>
     <% end %>

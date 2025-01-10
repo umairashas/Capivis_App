@@ -9,3 +9,4 @@
 #   end
 
 
+    <%= stylesheet_link_tag("home.css") %>
