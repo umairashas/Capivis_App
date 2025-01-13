@@ -1,4 +1,4 @@
-<!-- views/operators/centre_and_donor_details.html.erb -->
+<div class="container"><!-- views/operators/centre_and_donor_details.html.erb -->
 <h1>Centre and Donor Details</h1>
 
 <p><strong>Centre Name:</strong> <%= @centre.name %></p>
@@ -53,9 +53,20 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
 <% else %>
   <p>No donors associated with this centre.</p>
 <% end %>
 
 <%= link_to "Back to Operators", operators_path, class: 'btn btn-secondary' %>
+<style>
+  .container{
+    display: flex;
+    flex-direction: column;
+    margin-top: -200px;
+  }
+  .button{
+    display: flex;
+    gap: 500px;
+  }
+</style>

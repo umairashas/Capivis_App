@@ -1,6 +1,7 @@
-<%= link_to "View All Screenings", donor_screenings_path, class: 'btn btn-success' %>
+<div class="container">
+  <div class="button"><%= link_to "View All Screenings", donor_screenings_path, class: 'btn btn-success' %>
 <%= link_to "View All Donor Physical Exam", donor_physical_exams_path, class: 'btn btn-success' %>
-
+  </div>
 <h1>All Centres</h1>
 
 <table class="table">
@@ -32,3 +33,16 @@
     <% end %>
   </tbody>
 </table>
+</div>
+
+<style>
+  .container{
+    display: flex;
+    flex-direction: column;
+    margin-top: -400px;
+  }
+  .button{
+    display: flex;
+    gap: 500px;
+  }
+</style>
