@@ -1,6 +1,6 @@
 <%= form_with(model: @donor, local: true) do |form| %>
- <% if donor.errors.any? %>
-    <div class="alert alert-danger">
+  <% if donor.errors.any? %>
+    <div class="error-alert">
       <h4><%= pluralize(donor.errors.count, "error") %> prohibited this donor from being saved:</h4>
       <ul>
         <% donor.errors.full_messages.each do |message| %>
@@ -11,95 +11,139 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name, value: @first_name, class: 'form-control', required: true %>
+    <%= form.label :first_name, class: 'form-label' %>
+    <%= form.text_field :first_name, value: @first_name, class: 'form-input', required: true %>
   </div>
 
   <div class="form-group">
-    <%= form.label :middle_name %>
-    <%= form.text_field :middle_name, class: 'form-control' %>
+    <%= form.label :middle_name, class: 'form-label' %>
+    <%= form.text_field :middle_name, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name, value: @last_name, class: 'form-control', required: true %>
+    <%= form.label :last_name, class: 'form-label' %>
+    <%= form.text_field :last_name, value: @last_name, class: 'form-input', required: true %>
   </div>
 
   <div class="form-group">
-    <%= form.label :birth_date %>
-    <%= form.date_select :birth_date, class: 'form-control' %>
+    <%= form.label :birth_date, class: 'form-label' %>
+    <%= form.date_select :birth_date, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :gender %>
-    <%= form.select :gender, ['Male', 'Female', 'Other'], { include_blank: true }, class: 'form-control' %>
+    <%= form.label :gender, class: 'form-label' %>
+    <%= form.select :gender, ['Male', 'Female', 'Other'], { include_blank: true }, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :zipcode %>
-    <%= form.text_field :zipcode, class: 'form-control' %>
+    <%= form.label :zipcode, class: 'form-label' %>
+    <%= form.text_field :zipcode, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number, class: 'form-control' %>
+    <%= form.label :phone_number, class: 'form-label' %>
+    <%= form.text_field :phone_number, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :alternate_phone_number %>
-    <%= form.text_field :alternate_phone_number, class: 'form-control' %>
+    <%= form.label :alternate_phone_number, class: 'form-label' %>
+    <%= form.text_field :alternate_phone_number, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :city %>
-    <%= form.text_field :city, class: 'form-control' %>
+    <%= form.label :city, class: 'form-label' %>
+    <%= form.text_field :city, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :state %>
-    <%= form.text_field :state, class: 'form-control' %>
+    <%= form.label :state, class: 'form-label' %>
+    <%= form.text_field :state, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :country %>
-    <%= form.text_field :country, class: 'form-control' %>
+    <%= form.label :country, class: 'form-label' %>
+    <%= form.text_field :country, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :language %>
-    <%= form.text_field :language, class: 'form-control' %>
+    <%= form.label :language, class: 'form-label' %>
+    <%= form.text_field :language, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :address_line1 %>
-    <%= form.text_field :address_line1, class: 'form-control' %>
+    <%= form.label :address_line1, class: 'form-label' %>
+    <%= form.text_field :address_line1, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :address_line2 %>
-    <%= form.text_field :address_line2, class: 'form-control' %>
+    <%= form.label :address_line2, class: 'form-label' %>
+    <%= form.text_field :address_line2, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :centre_id, "Select Centre" %>
-    <%= form.select :centre_id, Centre.all.collect { |centre| [centre.name, centre.id] }, class: 'form-control' %>
+    <%= form.label :centre_id, "Select Centre", class: 'form-label' %>
+    <%= form.select :centre_id, Centre.all.collect { |centre| [centre.name, centre.id] }, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :document%>
-    <%= form.text_area :document, class: 'form-control', placeholder:'Enter the name of the document you are attaching' %>
-    <%= form.file_field :profile_image, class: 'form-control' %>
+    <%= form.label :document, class: 'form-label' %>
+    <%= form.text_area :document, class: 'form-input', placeholder: 'Enter the name of the document you are attaching' %>
+    <%= form.file_field :profile_image, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :arrival_datetime %>
-    <%= form.datetime_select :arrival_datetime, class: 'form-control' %>
+    <%= form.label :arrival_datetime, class: 'form-label' %>
+    <%= form.datetime_select :arrival_datetime, class: 'form-input' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :potential_fraud %>
-    <%= form.text_field :potential_fraud, class: 'form-control' %>
+    <%= form.label :potential_fraud, class: 'form-label' %>
+    <%= form.text_field :potential_fraud, class: 'form-input' %>
   </div>
 
-  <%= form.submit 'Submit', class: 'btn btn-success' %>
+  <%= form.submit 'Submit', class: 'btn-submit' %>
 <% end %>
+
+<style>
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ffffff;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .error-alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #f5c6cb;
+  }
+
+  .btn-submit {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn-submit:hover {
+    background-color: #218838;
+  }
+</style>

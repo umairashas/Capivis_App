@@ -1,10 +1,12 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h1>All Questions</h1>
-  <%= link_to 'Add New Question', new_question_path, class: 'btn btn-success' %>
+<div class="header-container">
+  <h1 class="page-title">All Questions</h1>
+  <div class="buttons">
+  <%= link_to 'Add New Question', new_question_path, class: 'btn-add-question' %>
+  <%= link_to 'Back', admin_dashboard_path, class: 'btn-back' %>
+  </div>
 
-<%= link_to 'Back', admin_dashboard_path, class: 'btn btn-primary' %>
-</div>
-<table class="table">
+
+<table class="questions-table">
   <thead>
     <tr>
       <th>Sr. No.</th>
@@ -21,14 +23,107 @@
         <td><%= question.answer_type %></td>
         <td>
           <% if can? :update, question %>
-            <%= link_to 'Edit', edit_question_path(question), class: 'btn btn-warning' %>
+            <%= link_to 'Edit', edit_question_path(question), class: 'btn-edit' %>
           <% end %>
 
           <% if can? :destroy, question %>
-            <%= button_to 'Delete', question_path(question), method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure?" } %>
+            <%= button_to 'Delete', question_path(question), method: :delete, class: 'btn-delete', data: { confirm: "Are you sure?" } %>
           <% end %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
+
+<style>
+ /* Header Container */
+.header-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 350px;
+}
+
+/* Page Title */
+.page-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 100px;
+}
+
+/* Button Styles */
+.btn-add-question, .btn-back, .btn-edit, .btn-delete {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.btn-add-question {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-add-question:hover {
+  background-color: #218838;
+}
+
+.btn-back {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-back:hover {
+  background-color: #0056b3;
+}
+
+.btn-edit {
+  background-color: #ffc107;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #e0a800;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+/* Table Styling */
+.questions-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  table-layout: fixed; /* Ensures a fixed layout and prevents shifting */
+}
+
+.questions-table th, .questions-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.questions-table th {
+  background-color: #fffff;
+  font-weight: bold;
+}
+
+/* Styling the buttons container */
+.buttons {
+  display: flex;
+  gap: 500px ;
+  margin-top: 30px; /* Add margin to separate from the table */
+}
+  
+
+</style>

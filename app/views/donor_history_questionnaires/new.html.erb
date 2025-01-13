@@ -1,3 +1,5 @@
+<div class= "container">
+  <h2>Donor History Questionnaire</h2>
 <%= form_with url: donor_history_questionnaires_path, method: :post, local: true do |form| %>
   <% if @questions.present? %>
     <% @questions.each_with_index do |question, index| %>
@@ -32,3 +34,12 @@
     <%= link_to 'Back to Donors', donors_path, class: 'btn btn-secondary ms-2' %>
   </div>
 <% end %>
+</div>
+<style>
+  .container{
+    display: flex;
+    flex-direction: column;
+    margin-top: -200px;
+
+  }
+</style>

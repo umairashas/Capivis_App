@@ -1,31 +1,155 @@
-<h1>Centres</h1>
+<div class="container">
+  <h1 class="page-title">Centres</h1>
 
-<%= link_to 'Add New Centre', new_centre_path, class: 'btn btn-primary' %>
-<%= link_to 'Back', admin_dashboard_path, class: 'btn btn-primary' %>
+  <div class="button-container">
+    <%= link_to 'Add New Centre', new_centre_path, class: 'btn-add' %>
+    <%= link_to 'Back', admin_dashboard_path, class: 'btn-back' %>
+  </div>
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Pincode</th>
-      <th>Location</th>
-      <th>Phone Number</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @centres.each do |centre| %>
+  <table class="centres-table">
+    <thead>
       <tr>
-        <td><%= centre.name %></td>
-        <td><%= centre.pincode %></td>
-        <td><%= centre.location %></td>
-        <td><%= centre.phone_number %></td>
-        <td>
-          <%= link_to 'View', centre_path(centre), class: 'btn btn-info btn-sm' %>
-          <%= link_to 'Edit', edit_centre_path(centre), class: 'btn btn-warning btn-sm' %>
-          <%= button_to 'Delete', centre_path(centre), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-        </td>
+        <th>Name</th>
+        <th>Pincode</th>
+        <th>Location</th>
+        <th>Phone Number</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% if @centres.any? %>
+        <% @centres.each do |centre| %>
+          <tr>
+            <td><%= centre.name %></td>
+            <td><%= centre.pincode %></td>
+            <td><%= centre.location %></td>
+            <td><%= centre.phone_number %></td>
+            <td>
+              <%= link_to 'View', centre_path(centre), class: 'btn-view' %>
+              <%= link_to 'Edit', edit_centre_path(centre), class: 'btn-edit' %>
+              <%= button_to 'Delete', centre_path(centre), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn-delete' %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <!-- Placeholder for empty table -->
+        <tr>
+          <td colspan="5" class="no-data">No centres available. Please add a new centre.</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  /* Page Title */
+  .page-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* Button Container */
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 850px;
+  }
+
+  /* Button Styles */
+  .btn-add,
+  .btn-back,
+  .btn-view,
+  .btn-edit,
+  .btn-delete {
+    text-decoration: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+  }
+
+  .btn-add {
+    background-color: #28a745;
+  }
+
+  .btn-add:hover {
+    background-color: #218838;
+  }
+
+  .btn-back {
+    background-color: #007bff;
+  }
+
+  .btn-back:hover {
+    background-color: #0056b3;
+  }
+
+  .btn-view {
+    background-color: #17a2b8;
+  }
+
+  .btn-view:hover {
+    background-color: #117a8b;
+  }
+
+  .btn-edit {
+    background-color: #ffc107;
+    color: black;
+  }
+
+  .btn-edit:hover {
+    background-color: #e0a800;
+  }
+
+  .btn-delete {
+    background-color: #dc3545;
+  }
+
+  .btn-delete:hover {
+    background-color: #c82333;
+  }
+
+  /* Table Styling */
+  .centres-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    table-layout: fixed;
+  }
+
+  .centres-table th,
+  .centres-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    word-wrap: break-word;
+  }
+
+  .centres-table th {
+    background-color: #fffff;
+    font-weight: bold;
+  }
+
+  .centres-table td {
+    vertical-align: middle;
+  }
+
+  .no-data {
+    text-align: center;
+    color: gray;
+    font-style: italic;
+  }
+
+  /* Ensure consistent height for table */
+  .container {
+    min-height: 300px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: -250px;
+  }
+</style>

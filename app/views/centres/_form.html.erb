@@ -1,4 +1,4 @@
-<%= form_with(model: @centre, local: true) do |form| %>
+<%= form_with(model: @centre, local: true, class: 'styled-form') do |form| %>
   <% if @centre.errors.any? %>
     <div class="alert alert-danger">
       <h4>There were errors with your submission:</h4>
@@ -31,8 +31,112 @@
   </div>
 
   <!-- Hidden field for operator_id -->
-   <%= form.hidden_field :operator_id, value: @operator %> 
+  <%= form.hidden_field :operator_id, value: @operator %> 
 
-  <%= form.submit 'Save', class: 'btn btn-success' %>
-  <%= link_to 'Cancel', centres_path, class: 'btn btn-secondary' %>
+  <div class="form-actions">
+    <%= form.submit 'Save', class: 'btn btn-success' %>
+    <%= link_to 'Cancel', centres_path, class: 'btn btn-secondary' %>
+  </div>
 <% end %>
+
+<style>
+  /* Form Container Styling */
+  .styled-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fffff;
+  }
+
+  /* Error Messages */
+  .alert {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
+  .alert-danger h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .alert-danger ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .alert-danger li {
+    list-style: disc;
+  }
+
+  /* Form Group Styling */
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .form-control:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+  }
+
+  /* Action Buttons */
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    color: white;
+    border: none;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+</style>

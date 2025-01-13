@@ -1,6 +1,6 @@
 <%= form_with(model: @question, local: true) do |form| %>
   <% if @question.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
+    <div id="error_explanation" class="error-explanation">
       <h4><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h4>
       <ul>
         <% @question.errors.full_messages.each do |message| %>
@@ -27,3 +27,86 @@
     <%= link_to 'Back', all_questions_path, class: 'btn btn-secondary ms-2' %>
   </div>
 <% end %>
+<style>/* Error Message Styling */
+#error_explanation {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+#error_explanation h4 {
+  margin-bottom: 10px;
+}
+
+#error_explanation ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+#error_explanation li {
+  margin-bottom: 5px;
+}
+
+/* Form Styling */
+.form-group {
+  margin-bottom: 15px;
+
+}
+
+.form-label {
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Button Styling */
+.btn-submit, .btn-back {
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.btn-submit:hover, .btn-back:hover {
+  background-color: #0056b3;
+}
+
+/* Button for Back link */
+.btn-back {
+  background-color: #6c757d;
+}
+
+.btn-back:hover {
+  background-color: #5a6268;
+}
+
+/* Centering the Form Buttons */
+.text-center {
+  text-align: center;
+  display: flex;
+  gap: 500px;
+}
+
+</style>

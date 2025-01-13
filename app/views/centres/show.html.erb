@@ -1,27 +1,93 @@
+<div class="con">
+  <div class="Address">
+    <h1><%= @centre.name %></h1>
+    <div>
+      <p><strong>Pincode:</strong> <%= @centre.pincode %></p>
+      <p><strong>Location:</strong> <%= @centre.location %></p>
+      <p><strong>Phone Number:</strong> <%= @centre.phone_number %></p>
+      <p><strong>Total Donors:</strong> <%= @donor_count %></p>
+    </div>
+  </div>
 
-<h1><%= @centre.name %></h1>
-
-<p><strong>Pincode:</strong> <%= @centre.pincode %></p>
-<p><strong>Location:</strong> <%= @centre.location %></p>
-<p><strong>Phone Number:</strong> <%= @centre.phone_number %></p>
-<p><strong>Total Donors:</strong> <%= @donor_count %></p>
-<h2><p><strong>Total Donors:</strong> <%= @donor_count %></p></h2>
-<h4>Associated Donors</h4>
-<% if @donors.any? %>
-  <ul>
-    <% @donors.each do |donor| %>
-        <p><strong>Donor Name:</strong> <%= donor.name %></p>
-        <p><strong>Gender:</strong> <%= donor.gender %></p>
-        <p><strong>Birth Date:</strong> <%= donor.birth_date %></p>
-        <p><strong>Phone Number:</strong> <%= donor.phone_number %></p>
-        <p><strong>Address:</strong> <%= donor.address_line1 %></p>
-        <p><strong>City:</strong> <%= donor.city %></p>
-        
+  <div class="donar">
+    <h4>Associated Donors</h4>
+    <% if @donors.any? %>
+      <ul>
+        <% @donors.each do |donor| %>
+          <li>
+            <p><strong>Donor Name:</strong> <%= donor.name %></p>
+            <p><strong>Gender:</strong> <%= donor.gender %></p>
+            <p><strong>Birth Date:</strong> <%= donor.birth_date %></p>
+            <p><strong>Phone Number:</strong> <%= donor.phone_number %></p>
+            <p><strong>Address:</strong> <%= donor.address_line1 %></p>
+            <p><strong>City:</strong> <%= donor.city %></p>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No donors found for this center.</p>
     <% end %>
-  </ul>
-<% else %>
-  <p>No donors found for this center.</p>
-<% end %>
 
-<%= link_to 'Back to Centres', centres_path, class: 'btn btn-secondary' %>
-<%= link_to 'Edit Centre', edit_centre_path(@centre), class: 'btn btn-primary' %>
+    <%= link_to 'Back to Centres', centres_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
+
+<style>
+  /* Main Container */
+  .con {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: -400px;
+    gap: 500px;
+  }
+
+  /* Address Section */
+  .Address {
+    flex: 1;
+    padding: 20px;
+    background-color: #fffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Donor Section */
+  .donar {
+    flex: 1;
+    padding: 20px;
+    background-color: #fffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Donor List */
+  .donar ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .donar li {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  /* Button */
+  .btn-secondary {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .btn-secondary:hover {
+    background-color: #0056b3;
+  }
+</style>

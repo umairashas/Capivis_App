@@ -1,44 +1,46 @@
-<div class="d-flex justify-content-between align-items-center mb-4">
-  <h1>Donor Screenings</h1>
-  <%= link_to 'Back', current_user.operator? ? operators_path : admin_dashboard_path, class: 'btn btn-primary' %>
+<div> 
+  <div class="d-flex justify-content-between align-items-center mb-6">
+    <h1>Donor Screenings</h1>
+    <%= link_to 'Back', current_user.operator? ? operators_path : admin_dashboard_path, class: 'btn btn-primary' %>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Centre Name</th>
+        <th>Donor Name</th>
+        <th>Height (cm)</th>
+        <th>Weight (kg)</th>
+        <th>Blood Pressure</th>
+        <th>Temperature (°C)</th>
+        <th>Hematocrit (%)</th>
+        <th>Total Protein (g/dL)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @donor_screenings.each do |screening| %>
+        <tr>
+          <td><%= screening.centre.name %></td>
+          <td><%= screening.donor.first_name %> <%= screening.donor.last_name %></td>
+          <td><%= screening.donor_height %></td>
+          <td><%= screening.donor_weight %></td>
+          <td><%= screening.donor_blood_pressure %></td>
+          <td><%= screening.donor_temperature %></td>
+          <td><%= screening.hematocrit %></td>
+          <td><%= screening.total_protein %></td>
+          <td>
+            <%= link_to "Show", donor_screening_path(screening), class: "btn btn-info btn-sm" %>
+            <% if current_user.operator? %>
+              <%= link_to "Edit", edit_donor_screening_path(screening), class: "btn btn-warning btn-sm" %>
+            <% end %>
+            <% if current_user.admin? %>
+              <%= button_to "Delete", donor_screening_path(screening), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Centre Name</th>
-      <th>Donor Name</th>
-      <th>Height (cm)</th>
-      <th>Weight (kg)</th>
-      <th>Blood Pressure</th>
-      <th>Temperature (°C)</th>
-      <th>Hematocrit (%)</th>
-      <th>Total Protein (g/dL)</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @donor_screenings.each do |screening| %>
-      <tr>
-        <td><%= screening.centre.name %></td>
-        <td><%= screening.donor.first_name %> <%= screening.donor.last_name %></td>
-        <td><%= screening.donor_height %></td>
-        <td><%= screening.donor_weight %></td>
-        <td><%= screening.donor_blood_pressure %></td>
-        <td><%= screening.donor_temperature %></td>
-        <td><%= screening.hematocrit %></td>
-        <td><%= screening.total_protein %></td>
-        <td>
-          <%= link_to "Show", donor_screening_path(screening), class: "btn btn-info btn-sm" %>
-          <% if current_user.operator? %>  <!-- Show button only if the user is an operator -->
-               <%= link_to "Edit", edit_donor_screening_path(screening), class: "btn btn-warning btn-sm" %>
-          <% end %>
-          <% if current_user.admin? %>
-          <%= button_to "Delete", donor_screening_path(screening), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>

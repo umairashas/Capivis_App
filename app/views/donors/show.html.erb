@@ -1,8 +1,9 @@
-<h1 class="text-center mb-4">Donor Details</h1>
+<div class="con container">
+  <h1 class="text-center mb-4">Donor Details</h1>
 
 <% if @donor.present? %>
   <!-- Donor Details Section -->
-  <div class="donor-details container">
+  <div class="donor-details container con details">
     <h3>Personal Information</h3>
     <p><strong>Full Name:</strong> <%= @donor.first_name %> <%= @donor.middle_name %> <%= @donor.last_name %></p>
     <p><strong>Gender:</strong> <%= @donor.gender %></p>
@@ -14,47 +15,105 @@
     <p><strong>Country:</strong> <%= @donor.country %></p>
     <p><strong>Language:</strong> <%= @donor.language %></p>
     <p><strong>Address:</strong> <%= @donor.address_line1 %>, <%= @donor.address_line2 %></p>
-
     <p><strong>ZIP Code:</strong> <%= @donor.zipcode %></p>
-    <p><strong>Centre Name:</strong> 
-      <%= @donor.centre.name %>  <!-- Display the name of the selected centre -->
-  </p>
+    <p><strong>Centre Name:</strong> <%= @donor.centre.name %></p>
     <p><strong>Arrival Date:</strong> <%= @donor.arrival_datetime %></p>
     <p><strong>Potential Fraud:</strong> <%= @donor.potential_fraud %></p>
     <p><strong>Document:</strong> <%= @donor.document.present? ? "Uploaded" : "Not Uploaded" %></p> 
-      <% if @donor.profile_image.attached? %>
-      <%= image_tag @donor.profile_image, style: "width:200px; height:300px" %>
-      <% else %>
-         <p>No profile image uploaded.</p>
-      <% end %>
+
+    <% if @donor.profile_image.attached? %>
+      <%= image_tag @donor.profile_image, style: "width:200px; height:300px; display:block; margin-top:10px;" %>
+    <% else %>
+      <p>No profile image uploaded.</p>
+    <% end %>
   </div>
 
   <!-- Blood Donation Terms Section -->
-  <div class="donor-details container mt-5">
+  <div class="donor-details container mt-5 con">
     <h3>Thank You for Agreeing to the Terms and Conditions</h3>
     <p><strong>Thank you for your valuable contribution to saving lives!</strong></p>
   </div>
 
   <!-- Donor History Questionnaire Section -->
- <div class="donor-details container mt-5">
-  <h3>Donor History Questionnaire (DHQ)</h3>
-  <p><strong>Below are the responses provided by the donor:</strong></p>
+  <div class="donor-details container mt-5 con details">
+    <h3>Donor History Questionnaire (DHQ)</h3>
+    <p><strong>Below are the responses provided by the donor:</strong></p>
 
-  <% if @donor_history_questionnaires.present? %>
-    <% @donor_history_questionnaires.each do |response| %>
-      <div class="form-group mb-4">
-        <p><strong>Question:</strong> <%= response.question.text %></p>
-        <p><strong>Answer:</strong> <%= response.answer.capitalize %></p>
-      </div>
+    <% if @donor_history_questionnaires.present? %>
+      <% @donor_history_questionnaires.each do |response| %>
+        <div class="form-group mb-4">
+          <p><strong>Question:</strong> <%= response.question.text %></p>
+          <p><strong>Answer:</strong> <%= response.answer.capitalize %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-center text-danger">No responses have been provided by the donor.</p>
     <% end %>
-  <% else %>
-    <p class="text-center text-danger">No responses have been provided by the donor.</p>
-  <% end %>
 
-<div class="form-group text-center mt-4">
-  <%= link_to 'Back to Donors', current_user.admin? ? donors_path : donors_path, class: 'btn btn-secondary ms-2' %>
-</div>
+    <div class="form-group text-center mt-4 con">
+      <%= link_to 'Back to Donors', current_user.admin? ? donors_path : donors_path, class: 'btn btn-secondary ms-2' %>
+    </div>
+  </div>
 
 <% else %>
   <p class="text-center text-danger">Donor details not found.</p>
 <% end %>
+</div>
+<style>
+  .donor-details {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fffff;
+    border-radius: 5px;
+  }
+
+  .donor-details h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .donor-details p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .donor-details strong {
+    font-weight: bold;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .mt-5 {
+    margin-top: 3rem;
+  }
+
+  .ms-2 {
+    margin-left: 0.5rem;
+  }
+
+  .mb-4 {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  .con{
+    display:flex ;
+    flex-direction: column;
+  }
+  .container{
+    margin-top: 300px;
+  }
+  .details{
+<%#     align-content: start; %>
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    align-items: start;
+  }
+</style>

@@ -1,30 +1,93 @@
-<div class="container mt-5">
-  <h2 class="text-center">Blood Donation</h2>
-  <p class="lead text-center">Please read and agree to the following terms and conditions before proceeding with your blood donation.</p>
-  <div class="terms mt-4">
+<div class="container details">
+  <h2>Blood Donation</h2>
+  <p class="lead">Please read and agree to the following terms and conditions before proceeding with your blood donation.</p>
+  <div class="terms">
     <h3>Terms and Conditions</h3>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">1. You must be at least 18 years old and in good health to donate blood.</li>
-      <li class="list-group-item">2. Donating blood should not cause harm to your health. If you have any medical conditions or concerns, please consult with a doctor before donating.</li>
-      <li class="list-group-item">3. You will need to disclose any medication you are taking, as well as recent travel history.</li>
-      <li class="list-group-item">4. The blood you donate will be used for patients in need of blood transfusions and other medical treatments.</li>
-      <li class="list-group-item">5. Your personal information will be kept confidential and used only for the purposes of the blood donation program.</li>
-      <li class="list-group-item">6. By donating blood, you consent to having your blood tested for safety and compatibility.</li>
-      <li class="list-group-item">7. The blood donation center reserves the right to refuse donation if you do not meet the eligibility criteria.</li>
-      <li class="list-group-item">8. You agree to follow the guidelines and instructions provided by the staff at the donation center.</li>
-      <li class="list-group-item">9. You understand that side effects may occur, such as dizziness or lightheadedness, but that they are generally mild and temporary.</li>
-      <li class="list-group-item">10. By donating blood, you help save lives, and your contribution is highly appreciated.</li>
+    <ul>
+      <li>1. You must be at least 18 years old and in good health to donate blood.</li>
+      <li>2. Donating blood should not cause harm to your health. If you have any medical conditions or concerns, please consult with a doctor before donating.</li>
+      <li>3. You will need to disclose any medication you are taking, as well as recent travel history.</li>
+      <li>4. The blood you donate will be used for patients in need of blood transfusions and other medical treatments.</li>
+      <li>5. Your personal information will be kept confidential and used only for the purposes of the blood donation program.</li>
+      <li>6. By donating blood, you consent to having your blood tested for safety and compatibility.</li>
+      <li>7. The blood donation center reserves the right to refuse donation if you do not meet the eligibility criteria.</li>
+      <li>8. You agree to follow the guidelines and instructions provided by the staff at the donation center.</li>
+      <li>9. You understand that side effects may occur, such as dizziness or lightheadedness, but that they are generally mild and temporary.</li>
+      <li>10. By donating blood, you help save lives, and your contribution is highly appreciated.</li>
     </ul>
   </div>
-  <div class="text-center mt-4">
+  <div class="text-center">
     <%= form_with model: @donor_handbook, method: :post do |f| %> 
-    <%= f.hidden_field :donor_id, value: params[:donor_id] %> 
-
-      <div class="form-check text-left">
+      <%= f.hidden_field :donor_id, value: params[:donor_id] %> 
+      <div class="form-check">
         <%= f.check_box :terms_accepted, required: true, class: "form-check-input" %>
         <%= f.label :terms_accepted, "I agree to the terms and conditions", class: "form-check-label" %>
       </div>
-      <%= f.submit "Submit", class: "btn btn-primary btn-lg mt-3" %>
+      <div class="submit"><%= f.submit "Submit", class: "btn" %></div>
     <% end %> 
   </div>
 </div>
+
+<style>
+  /* Center content both horizontally and vertically */
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+  }
+
+  h2, p, h3 {
+    margin-bottom: 20px;
+  }
+
+  .terms ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .terms li {
+    margin: 10px 0;
+  }
+
+  .form-check {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  .container{
+    margin-top: 300px;
+  }
+  .details{
+<%#     align-content: start; %>
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    align-items: start;
+  }
+.submit {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  width: 100%; 
+  margin-top: 20px;
+}
+
+</style>
