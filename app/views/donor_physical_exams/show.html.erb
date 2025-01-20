@@ -21,14 +21,20 @@
   <strong>Physical Exam:</strong>
   <%= @donor_physical_exam.physical_exam? ? 'Yes' : 'No' %>
 </p>
-
+<div class="button">
 <%= link_to 'Edit', edit_donor_physical_exam_path(@donor_physical_exam), class: 'btn btn-warning' %>
-<%= link_to 'Back ', :back, class: 'btn btn-secondary' %>
+<%= link_to 'Back ', :back, class: 'btn btn-secondary' %></div>
 </div>
 <style>
   .container{
-    margin-top: -200px;
+    margin-top: 200px;
     display: flex;
     flex-direction: column;
   } 
+  .button{
+    width:50px;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+  }
 </style>

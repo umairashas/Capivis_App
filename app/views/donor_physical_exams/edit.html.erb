@@ -1,5 +1,16 @@
-<h1>Edit Donor Physical Exam</h1>
-
+<div class="con">
+  <h1> Edit Donor Physical Exam</h1>
 <%= render 'form', donor_physical_exam: @donor_physical_exam %>
-
 <%= link_to 'Back to List', donor_physical_exams_path %>
+</div>
+<style>
+	.con{
+		margin-top: 100px;
+		display:flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	h1{
+		text-align: center;
+	}
+</style>

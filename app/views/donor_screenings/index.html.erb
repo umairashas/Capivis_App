@@ -1,9 +1,8 @@
 <div class="container"> 
-  <div class="d-flex justify-content-between align-items-center mb-6">
+  <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Donor Screenings</h1>
-    
-  </div>
-  <div class="button"><%= link_to 'Back', current_user.operator? ? operators_path : admin_dashboard_path, class: 'btn btn-primary' %></div>
+  <%= link_to 'Back', current_user.operator? ? operators_path : admin_dashboard_path, class: 'btn btn-primary' %>
+   </div>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -49,9 +48,5 @@
     margin-top: 100px;
     display: flex;
     flex-direction: column;
-  }
-  .button{
-    margin-left: 1000px;
-    margin-bottom: 50px;
   }
 </style>
