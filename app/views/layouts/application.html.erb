@@ -21,28 +21,6 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-
-    <style>
-      /* Position the notice message at the top of the page */
-      .notice {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 9999;
-        margin: 0;
-        padding: 10px;
-        background-color: #17a2b8; /* Bootstrap alert-info color */
-        color: white;
-        text-align: center;
-        font-size: 16px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      }
-
-      .container.mt-5 {
-        margin-top: 80px; /* Add space to account for the fixed notice */
-      }
-    </style>
   </head>
 
   <body>
@@ -54,8 +32,8 @@
        <!-- Notices and Alerts -->
     <% if notice || alert %>
       <div class="container mt-4">
-        <p class="alert alert-info notice"><%= notice %></p>
-        <p class="alert alert-danger"><%= alert %></p>
+        <%# <p class="alert alert-info notice"><%= notice %></p>
+        <%# <p class="alert alert-danger"><%= alert %></p> 
       </div>
     <% end %>
       <%= yield %>

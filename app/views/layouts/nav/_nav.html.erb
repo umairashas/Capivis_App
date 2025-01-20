@@ -1,49 +1,225 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <%= link_to "Capivis App", root_path, class: "navbar-brand" %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <%= link_to "Home", home_path, class: "nav-link active" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "About", about_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Contact Us", contact_path, class: "nav-link" %>
-        </li>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for(:title) || "Capivis App" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= yield :head %>
 
-        <% if current_user %>
-             <% if current_user.role == 'admin'%>
-                 <li class="nav-item">
-                    <%= link_to "Admin Dashboard", admin_dashboard_path, class: 'nav-link active' %>
-                  </li>
-             <% elsif current_user.role == 'operator' %>
-                 <li class="nav-item">
-                    <%= link_to "Operator Dashboard", operators_path, class: 'nav-link active' %>
-                 </li>
-             <% end %>
-        <% end %>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
 
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= link_to "Hi, #{current_user.email}", edit_user_registration_path, class: "nav-link active" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "nav-link active" %>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary" %>
-          </li>
-          <li class="nav-item ms-2">
-            <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-secondary" %>
-          </li>
-        <% end %>
-      </ul>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+
+    <div class="navbar-new">
+      <div class="navbar-container-new">
+        <%= link_to "Capivis App", root_path, class: "navbar-brand-new" %>
+
+        <div class="navbar-links-new" id="navbarNav">
+          <ul class="navbar-nav-new">
+            <li class="nav-item-new pad">
+              <%= link_to "Home", home_path, class: "nav-link-new" %>
+            </li>
+            <li class="nav-item-new pad">
+              <%= link_to "About", about_path, class: "nav-link-new" %>
+            </li>
+            <li class="nav-item-new pad">
+              <%= link_to "Contact Us", contact_path, class: "nav-link-new" %>
+            </li>
+
+            <% if current_user %>
+              <% if current_user.role == 'admin' %>
+                <li class="nav-item-new">
+                  <%= link_to "Admin Dashboard", admin_dashboard_path, class: 'nav-link active-new' %>
+                </li>
+              <% elsif current_user.role == 'operator' %>
+                <li class="nav-item-new">
+                  <%= link_to "Operator Dashboard", operators_path, class: 'nav-link active-new' %>
+                </li>
+              <% end %>
+            <% end %>
+
+            <% if user_signed_in? %>
+              <li class="nav-item-new">
+                <%= link_to "Hi, #{current_user.email}", edit_user_registration_path, class: "nav-link active-new" %>
+              </li>
+              <li class="nav-item-new">
+                <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "nav-link active-new" %>
+              </li>
+            <% else %>
+              <li class="nav-item-new">
+                <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary-new" %>
+              </li>
+              <li class="nav-item ms-2-new">
+                <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-secondary-new" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-</nav>
+
+  </body>
+</html>
+
+<style>
+  /* Root Colors */
+  :root {
+    --background: #1a1a2e;
+    --color: #ffffff;
+    --primary-color: #0f3460;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--background);
+    color: var(--color);
+    letter-spacing: 1px;
+    transition: background 0.2s ease;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--color);
+  }
+
+  /* Navbar Styles */
+  .navbar-new {
+    background-color: var(--primary-color);
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  .navbar-container-new {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+<%#     margin-top: 10px; %>
+  }
+
+  .navbar-brand-new {
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .navbar-toggler-new {
+    font-size: 1.5rem;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .navbar-links-new {
+    display: flex;
+    gap: 20px;
+  }
+
+  .navbar-nav-new {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    margin-top: 7px;
+  }
+
+  .nav-item-new {
+    
+  }
+
+  .nav-link-new {
+    color: #fff;
+    padding: 8px 15px;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  
+
+  }
+  .pad{
+      padding-top: 6px;
+  }
+
+  .nav-link-new:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .nav-link.active-new {
+    background-color: var(--primary-color);
+  }
+
+  /* Button Styles */
+  .btn-new {
+    padding: 8px 15px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+
+  .btn-primary-new {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .btn-secondary-new {
+    background-color: #6c757d;
+    color: #fff;
+  }
+
+  .btn-new:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Mobile View */
+  @media (max-width: 768px) {
+    .navbar-links-new {
+      display: none;
+      width: 100%;
+      background-color: var(--primary-color);
+      position: absolute;
+      top: 60px;
+      left: 0;
+      z-index: 1000;
+      padding: 10px;
+    }
+
+    .navbar-toggler-new {
+      display: block;
+    }
+
+    .navbar-links-new.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+
+<script>
+  function toggleNavbar() {
+    const navbarLinks = document.getElementById('navbarNav');
+    navbarLinks.classList.toggle('active');
+  }
+</script>

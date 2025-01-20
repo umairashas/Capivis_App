@@ -10,7 +10,7 @@
     </div>
   <% end %>
 
-  <!-- Text Input for Question -->
+<div class="question">
   <div class="form-group">
     <%= form.label :text, "Question Text", class: 'form-label' %>
     <%= form.text_area :text, class: 'form-control', rows: 3, placeholder: 'Enter the question text here' %>
@@ -27,6 +27,7 @@
     <%= link_to 'Back', all_questions_path, class: 'btn btn-secondary ms-2' %>
   </div>
 <% end %>
+</div>
 <style>/* Error Message Styling */
 #error_explanation {
   background-color: #f8d7da;
@@ -107,6 +108,10 @@
   text-align: center;
   display: flex;
   gap: 500px;
+}
+
+.question{
+<%#   margin-top: 200px; %>
 }
 
 </style>
