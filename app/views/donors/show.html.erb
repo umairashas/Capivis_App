@@ -1,120 +1,121 @@
-<div class="con container">
+<div class="container mt-5">
   <h1 class="text-center">Donor Details</h1>
 
-<% if @donor.present? %>
-  <!-- Donor Details Section -->
-  <div class="donor-details container con details">
-    <h3>Personal Information</h3>
-    <p><strong>Full Name:</strong> <%= @donor.first_name %> <%= @donor.middle_name %> <%= @donor.last_name %></p>
-    <p><strong>Gender:</strong> <%= @donor.gender %></p>
-    <p><strong>Birth Date:</strong> <%= @donor.birth_date %></p>
-    <p><strong>Phone Number:</strong> <%= @donor.phone_number %></p>
-    <p><strong>Alternate Phone Number:</strong> <%= @donor.alternate_phone_number %></p>
-    <p><strong>City:</strong> <%= @donor.city %></p>
-    <p><strong>State:</strong> <%= @donor.state %></p>
-    <p><strong>Country:</strong> <%= @donor.country %></p>
-    <p><strong>Language:</strong> <%= @donor.language %></p>
-    <p><strong>Address:</strong> <%= @donor.address_line1 %>, <%= @donor.address_line2 %></p>
-    <p><strong>ZIP Code:</strong> <%= @donor.zipcode %></p>
-    <p><strong>Centre Name:</strong> <%= @donor.centre.name %></p>
-    <p><strong>Arrival Date:</strong> <%= @donor.arrival_datetime %></p>
-    <p><strong>Potential Fraud:</strong> <%= @donor.potential_fraud %></p>
-    <p><strong>Document:</strong> <%= @donor.document.present? ? "Uploaded" : "Not Uploaded" %></p> 
-
-    <% if @donor.profile_image.attached? %>
-      <%= image_tag @donor.profile_image, style: "width:200px; height:300px; display:block; margin-top:10px;" %>
-    <% else %>
-      <p>No profile image uploaded.</p>
-    <% end %>
-  </div>
-
-  <!-- Blood Donation Terms Section -->
-  <div class="donor-details container mt-5 con">
-    <h3>Thank You for Agreeing to the Terms and Conditions</h3>
-    <p><strong>Thank you for your valuable contribution to saving lives!</strong></p>
-  </div>
-
-  <!-- Donor History Questionnaire Section -->
-  <div class="donor-details container mt-5 con details">
-    <h3>Donor History Questionnaire (DHQ)</h3>
-    <p><strong>Below are the responses provided by the donor:</strong></p>
-
-    <% if @donor_history_questionnaires.present? %>
-      <% @donor_history_questionnaires.each do |response| %>
-        <div class="form-group mb-4">
-          <p><strong>Question:</strong> <%= response.question.text %></p>
-          <p><strong>Answer:</strong> <%= response.answer.capitalize %></p>
-        </div>
-      <% end %>
-    <% else %>
-      <p class="text-center text-danger">No responses have been provided by the donor.</p>
-    <% end %>
-
-    <div class="form-group text-center mt-4 con">
-      <%= link_to 'Back to Donors', current_user.admin? ? donors_path : donors_path, class: 'btn btn-secondary ms-2' %>
+  <% if @donor.present? %>
+    <!-- Donor Personal Details Table -->
+    <div class="donor-details table-responsive mt-4">
+      <h3>Personal Information</h3>
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr><th>Full Name</th><td><%= @donor.first_name %> <%= @donor.middle_name %> <%= @donor.last_name %></td></tr>
+          <tr><th>Gender</th><td><%= @donor.gender %></td></tr>
+          <tr><th>Birth Date</th><td><%= @donor.birth_date %></td></tr>
+          <tr><th>Phone Number</th><td><%= @donor.phone_number %></td></tr>
+          <tr><th>Alternate Phone</th><td><%= @donor.alternate_phone_number %></td></tr>
+          <tr><th>City</th><td><%= @donor.city %></td></tr>
+          <tr><th>State</th><td><%= @donor.state %></td></tr>
+          <tr><th>Country</th><td><%= @donor.country %></td></tr>
+          <tr><th>Language</th><td><%= @donor.language %></td></tr>
+          <tr><th>Address</th><td><%= @donor.address_line1 %>, <%= @donor.address_line2 %></td></tr>
+          <tr><th>ZIP Code</th><td><%= @donor.zipcode %></td></tr>
+          <tr><th>Centre Name</th><td><%= @donor.centre.name %></td></tr>
+          <tr><th>Arrival Date</th><td><%= @donor.arrival_datetime %></td></tr>
+          <tr><th>Potential Fraud</th><td><%= @donor.potential_fraud %></td></tr>
+          <tr><th>Document</th><td><%= @donor.document.present? ? "Uploaded" : "Not Uploaded" %></td></tr>
+          <tr>
+            <th>Profile Image</th>
+            <td>
+              <% if @donor.profile_image.attached? %>
+                <%= image_tag @donor.profile_image, style: "width:200px; height:300px; display:block; margin-top:10px;" %>
+              <% else %>
+                No profile image uploaded.
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </div>
 
-<% else %>
-  <p class="text-center text-danger">Donor details not found.</p>
-<% end %>
+    <!-- Blood Donation Terms Section -->
+    <div class="donor-details text-center mt-5">
+      <h3>Thank You for Agreeing to the Terms and Conditions</h3>
+      <p><strong>Thank you for your valuable contribution to saving lives!</strong></p>
+    </div>
+
+    <!-- Donor History Questionnaire Section -->
+    <div class="donor-details table-responsive mt-5">
+      <h3>Donor History Questionnaire (DHQ)</h3>
+      <p><strong>Below are the responses provided by the donor:</strong></p>
+
+      <% if @donor_history_questionnaires.present? %>
+        <table class="table table-bordered table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>Question</th>
+              <th>Answer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @donor_history_questionnaires.each do |response| %>
+              <tr>
+                <td><%= response.question.text %></td>
+                <td><%= response.answer.capitalize %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p class="text-center text-danger">No responses have been provided by the donor.</p>
+      <% end %>
+
+      <div class="text-center mt-4">
+        <%= link_to 'Back to Donors', donors_path, class: 'btn btn-secondary' %>
+      </div>
+    </div>
+
+  <% else %>
+    <p class="text-center text-danger">Donor details not found.</p>
+  <% end %>
 </div>
+
+<!-- CSS Styling -->
 <style>
   .donor-details {
-    margin-bottom: 20px;
+    background-color: transparent;
+    border-radius: 8px;
     padding: 20px;
-    background-color: #fffff;
-    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   }
 
-  .donor-details h3 {
+  h3 {
     font-size: 1.8rem;
     margin-bottom: 20px;
   }
 
-  .donor-details p {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+  table {
+    width: 100%;
   }
 
-  .donor-details strong {
-    font-weight: bold;
-  }
-
-  .text-center {
-    text-align: center;
-    margin-bottom: -100px;
-  }
-
-  .mt-5 {
-    margin-top: 3rem;
-  }
-
-  .ms-2 {
-    margin-left: 0.5rem;
-  }
-
-  .mb-4 {
-    margin-bottom: 1.5rem;
+  .table th {
+    background-color: #343a40;
+    color: white;
+    text-align: left;
   }
 
   .btn-secondary {
     background-color: #6c757d;
     color: #fff;
   }
-  .con{
-    display:flex ;
-    flex-direction: column;
+
+  .text-center {
+    text-align: center;
   }
-  .container{
-    margin-top: 100px;
+
+  .mt-5 {
+    margin-top: 3rem;
   }
-  .details{
-<%#     align-content: start; %>
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-content: start;
-    align-items: start;
+
+  .container {
+    margin-top: 80px !important;
   }
 </style>

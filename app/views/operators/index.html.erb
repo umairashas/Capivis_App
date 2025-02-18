@@ -1,48 +1,92 @@
 <div class="container">
-  <div class="button"><%= link_to "View All Screenings", donor_screenings_path, class: 'btn btn-success' %>
-<%= link_to "View All Donor Physical Exam", donor_physical_exams_path, class: 'btn btn-success' %>
-  </div>
-<h1>All Centres</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Pincode</th>
-      <th>Location</th>
-      <th>Phone Number</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @centres.each do |centre| %>
+  
+  <h1>All Centres</h1>
+    <div class="button-group">
+    <a href="<%= donor_screenings_path %>" class="btn">View All Screenings</a>
+    <a href="<%= donor_physical_exams_path %>" class="btn">View All Donor Physical Exams</a>
+    </div>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= centre.name %></td>
-        <td><%= centre.pincode %></td>
-        <td><%= centre.location %></td>
-        <td><%= centre.phone_number %></td>
-        <td>
-          <% if centre.donors.any? %> <!-- Check if the centre has at least one donor -->
-           <%= link_to "View Associated Donors", centre_and_donor_details_operator_path(centre), class: 'btn btn-secondary' %>
-
-          <% else %>
-            <p>No donors available</p> <!-- Display a message when there are no donors -->
-          <% end %>
-        </td>
+        <th>Name</th>
+        <th>Pincode</th>
+        <th>Location</th>
+        <th>Phone Number</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @centres.each do |centre| %>
+        <tr>
+          <td><%= centre.name %></td>
+          <td><%= centre.pincode %></td>
+          <td><%= centre.location %></td>
+          <td><%= centre.phone_number %></td>
+          <td>
+            <% if centre.donors.any? %>
+              <a href="<%= centre_and_donor_details_operator_path(centre) %>" class="btn">View Associated Donors</a>
+            <% else %>
+              <span class="no-donors">No donors available</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <style>
-  .container{
+  .container {
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
+    align-items: center;
+    margin-top: 50px;
+    padding: 20px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .button{
+  
+  .button-group {
     display: flex;
-    gap: 700px;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .btn {
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+
+  .table td {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .table th {
+    color: white;
+    border: 1px solid white;
+    padding: 10px;
+    text-align: left;
+    background-color: transparent;
+  }
+  
+  .no-donors {
+    color: #888;
   }
 </style>

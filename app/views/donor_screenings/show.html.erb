@@ -1,32 +1,130 @@
 <div class="container">
   <h1>Donor Screening Details</h1>
 
-<div class="card">
-  <div class="card-body">
-    <h2>Centre Information</h2>
-    <p><strong>Centre Name:</strong> <%= @donor_screening.centre.name %></p>
+  <div class="card">
+    <div class="card-body">
+      <h2>Centre Information</h2>
+      <p><strong>Centre Name:</strong> <%= @donor_screening.centre.name %></p>
 
-    <h2>Donor Information</h2>
-    <p><strong>Donor Name:</strong> <%= @donor_screening.donor.first_name %> <%= @donor_screening.donor.last_name %></p>
+      <h2>Donor Information</h2>
+      <p><strong>Donor Name:</strong> <%= @donor_screening.donor.first_name %> <%= @donor_screening.donor.last_name %></p>
 
-    <h2>Screening Details</h2>
-    <p><strong>Height (cm):</strong> <%= @donor_screening.donor_height %></p>
-    <p><strong>Weight (kg):</strong> <%= @donor_screening.donor_weight %></p>
-    <p><strong>Blood Pressure:</strong> <%= @donor_screening.donor_blood_pressure %></p>
-    <p><strong>Temperature (°C):</strong> <%= @donor_screening.donor_temperature %></p>
-    <p><strong>Hematocrit (%):</strong> <%= @donor_screening.hematocrit %></p>
-    <p><strong>Total Protein (g/dL):</strong> <%= @donor_screening.total_protein %></p>
+      <h2>Screening Details</h2>
+      <p><strong>Height (cm):</strong> <%= @donor_screening.donor_height %></p>
+      <p><strong>Weight (kg):</strong> <%= @donor_screening.donor_weight %></p>
+      <p><strong>Blood Pressure:</strong> <%= @donor_screening.donor_blood_pressure %></p>
+      <p><strong>Temperature (°C):</strong> <%= @donor_screening.donor_temperature %></p>
+      <p><strong>Hematocrit (%):</strong> <%= @donor_screening.hematocrit %></p>
+      <p><strong>Total Protein (g/dL):</strong> <%= @donor_screening.total_protein %></p>
+      <div class="actions">
+    <%= link_to "Back to Screenings", :back, class: "btn btn-secondary" %>
   </div>
-</div>
+    </div>
+  </div>
 
-<div class="mt-3">
-  <%= link_to "Back to Screenings", :back, class: "btn btn-secondary" %>
-</div>
+  
 </div>
 <style>
-  .container{
-    margin-top: 80px;
-    display: flex;
-    flex-direction: column;
+  /* General Reset */
+* {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Container Styling */
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  font-size: 24px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Card Styling */
+.card {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+h2 {
+  font-size: 20px;
+  color: blue;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 16px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+strong {
+  font-weight: bold;
+  color: skyblue;
+}
+
+/* Button Styling */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Actions Section */
+.actions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 15px;
   }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
 </style>

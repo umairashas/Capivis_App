@@ -3,8 +3,8 @@ class OperatorsController < ApplicationController
 
    def centre_and_donor_details
        @centre = Centre.find(params[:id])
-      @donors = @centre.donors
-      @donor_count = @donors.count
+       @donors = @centre.donors
+       @donor_count = @donors.count
    end
 
    def index

@@ -13,7 +13,7 @@
        get "/dashboard", to: "admin#dashboard"
     end
 
-
+    resources :messages
       resources :operators do
        member do
           get "centre_and_donor_details"

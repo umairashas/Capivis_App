@@ -1,0 +1,74 @@
+<h2>Messages</h2>
+
+<table class="details-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Message</th>
+      <th>Sent At</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @messages.each do |message| %>
+      <tr>
+        <td><%= message.name %></td>
+        <td><%= message.email %></td>
+        <td><%= message.message %></td>
+        <td><%= message.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class="btn-back">
+  <%= link_to 'Back', admin_dashboard_path %>
+</div>
+
+<style>
+  h2 {
+    margin-top: 100px;
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin-bottom: 20px;
+  }
+
+  .details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .details-table th,
+  .details-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+
+  .details-table th {
+    background-color: transparent;
+    font-weight: bold;
+  }
+
+  .btn-back {
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    margin: auto;
+    width: 10%;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+
+  .btn-back:hover {
+    background-color: #0056b3;
+  }
+</style>

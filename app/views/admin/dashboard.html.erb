@@ -1,82 +1,132 @@
 <div class="con-dashboard">  
+  <h1 class="dashboard-title-dashboard">Admin Dashboard</h1>
 
-<h1 class="dashboard-title-dashboard">Admin Dashboard</h1>
+  <p class="dashboard-welcome-dashboard">
+    Welcome, <%= "#{current_user.first_name} #{current_user.last_name}" %>! Manage the application below:
+  </p>
 
-<p class="dashboard-welcome-dashboard">
-  Welcome, <%= "#{current_user.first_name} #{current_user.last_name}" %>! Manage the application below:
-</p>
 
-<div class="dashboard-container-dashboard">
-  <div class="dashboard-row-dashboard">
-    <!-- View All Donors -->
-    <div class="dashboard-item-dashboard">
-      <div class="dashboard-card-dashboard">
-        <div class="dashboard-card-body-dashboard">
-          <%= link_to 'View All Donors', donors_path, class: 'dashboard-btn-dashboard dashboard-btn-info-dashboard' %>
+  <div class="dashboard-container-dashboard">
+    <div class="dashboard-row-dashboard">
+      <!-- View All Donors -->
+      <div class="dashboard-item-dashboard">
+        <div class="dashboard-card-dashboard">
+          <div class="dashboard-card-icon-dashboard">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="dashboard-card-body-dashboard">
+            <h3>View All Donors</h3>
+            <%= link_to 'Go to Donors', donors_path, class: 'dashboard-btn-dashboard dashboard-btn-info-dashboard' %>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- View Questions -->
-    <div class="dashboard-item-dashboard">
-      <div class="dashboard-card-dashboard">
-        <div class="dashboard-card-body-dashboard">
-          <%= link_to 'View Questions', admin_dashboard_path(section: 'questions'), class: 'dashboard-btn-dashboard dashboard-btn-secondary-dashboard' %>
+      <!-- View All Messages -->
+      <div class="dashboard-item-dashboard">
+        <div class="dashboard-card-dashboard">
+          <div class="dashboard-card-icon-dashboard">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="dashboard-card-body-dashboard">
+            <h3>View All Messages</h3>
+            <%= link_to 'Go to Messages', messages_path, class: 'dashboard-btn-dashboard dashboard-btn-info-dashboard' %>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- View All Centres -->
-    <div class="dashboard-item-dashboard">
-      <div class="dashboard-card-dashboard">
-        <div class="dashboard-card-body-dashboard">
-          <%= link_to 'View All Centres', centres_path, class: 'dashboard-btn-dashboard dashboard-btn-info-dashboard' %>
+      <!-- View Questions -->
+      <div class="dashboard-item-dashboard">
+        <div class="dashboard-card-dashboard">
+          <div class="dashboard-card-icon-dashboard">
+            <i class="fas fa-question-circle"></i>
+          </div>
+          <div class="dashboard-card-body-dashboard">
+            <h3>View Questions</h3>
+            <%= link_to 'Go to Questions', admin_dashboard_path(section: 'questions'), class: 'dashboard-btn-dashboard dashboard-btn-secondary-dashboard' %>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- View Donor Screenings -->
-    <div class="dashboard-item-dashboard">
-      <div class="dashboard-card-dashboard">
-        <div class="dashboard-card-body-dashboard">
-          <%= link_to 'View Donor Screenings', admin_dashboard_path(section: 'donor_screenings'), class: 'dashboard-btn-dashboard dashboard-btn-warning-dashboard' %>
+      <!-- View All Centres -->
+      <div class="dashboard-item-dashboard">
+        <div class="dashboard-card-dashboard">
+          <div class="dashboard-card-icon-dashboard">
+            <i class="fas fa-hospital"></i>
+          </div>
+          <div class="dashboard-card-body-dashboard">
+            <h3>View All Centres</h3>
+            <%= link_to 'Go to Centres', centres_path, class: 'dashboard-btn-dashboard dashboard-btn-info-dashboard' %>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- View Donor Physical Exams -->
-    <div class="dashboard-item-dashboard">
-      <div class="dashboard-card-dashboard">
-        <div class="dashboard-card-body-dashboard">
-          <%= link_to 'View Donor Physical Exams', admin_dashboard_path(section: 'donor_physical_exams'), class: 'dashboard-btn-dashboard dashboard-btn-warning-dashboard' %>
+      <!-- View Donor Screenings -->
+      <div class="dashboard-item-dashboard">
+        <div class="dashboard-card-dashboard">
+          <div class="dashboard-card-icon-dashboard">
+            <i class="fas fa-clipboard-check"></i>
+          </div>
+          <div class="dashboard-card-body-dashboard">
+            <h3>View Donor Screenings</h3>
+            <%= link_to 'Go to Screenings', admin_dashboard_path(section: 'donor_screenings'), class: 'dashboard-btn-dashboard dashboard-btn-warning-dashboard' %>
+          </div>
         </div>
       </div>
+
+      
+
+      <!-- View Donor Physical Exams -->
+      <div class="dashboard-item-dashboard">
+        <div class="dashboard-card-dashboard">
+          <div class="dashboard-card-icon-dashboard">
+            <i class="fas fa-stethoscope"></i>
+          </div>
+          <div class="dashboard-card-body-dashboard">
+            <h3>View Donor Exams</h3>
+            <%= link_to 'Go to Exams', admin_dashboard_path(section: 'donor_physical_exams'), class: 'dashboard-btn-dashboard dashboard-btn-warning-dashboard' %>
+          </div>
+        </div>
+      </div>
+      
     </div>
   </div>
 </div>
 
-</div>
-
 <style>
+*{
+  overflow: hidden;
+}
+
+  /* General Styles */
+  .con-dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 10px;
+    background-color: var(--primary-bg);
+  }
+
   /* Title Styles */
   .dashboard-title-dashboard {
     text-align: center;
-    margin-top: 500px;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
+    color: white;
+    margin-top: 30px;
   }
 
   /* Welcome Text Styles */
   .dashboard-welcome-dashboard {
     text-align: center;
-    margin-bottom: 40px;
     font-size: 18px;
-    color: #555;
+    color: white;
   }
 
   /* Container for the Dashboard Items */
   .dashboard-container-dashboard {
     width: 100%;
+    max-width: 1200px;
     padding: 0 15px;
   }
 
@@ -84,44 +134,62 @@
   .dashboard-row-dashboard {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     gap: 30px;
-    margin-top: 20px;
   }
 
   /* Individual Item Card */
   .dashboard-item-dashboard {
     flex: 1;
     min-width: 250px;
-    max-width: 300px;
+    max-width: 350px;
     margin-bottom: 30px;
   }
 
   /* Card Styles */
   .dashboard-card-dashboard {
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .dashboard-card-body-dashboard {
+  .dashboard-card-dashboard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .dashboard-card-icon-dashboard {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50px;
+    background-color: #103460;
+    color: white;
+    font-size: 40px;
+    padding: 20px;
+  }
+
+  .dashboard-card-body-dashboard {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .dashboard-card-body-dashboard h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #103460;
+    margin-bottom: 15px;
   }
 
   /* Button Styles */
   .dashboard-btn-dashboard {
-    padding: 15px 30px;
-    font-size: 18px;
+    padding: 10px 20px;
+    font-size: 16px;
     text-decoration: none;
     border-radius: 8px;
-    width: 100%;
-    text-align: center;
     color: white;
-    display: block;
+    display: inline-block;
     font-weight: bold;
     transition: background-color 0.3s ease;
   }
@@ -135,25 +203,18 @@
   }
 
   .dashboard-btn-secondary-dashboard {
-    background-color: #6c757d;
+    background-color: #18A1B6;
   }
 
   .dashboard-btn-secondary-dashboard:hover {
-    background-color: #5a6268;
+    background-color: #138496;
   }
 
   .dashboard-btn-warning-dashboard {
-    background-color: #ffc107;
+    background-color: #18A1B6;
   }
 
   .dashboard-btn-warning-dashboard:hover {
-    background-color: #e0a800;
-  }
-
-  .con-dashboard {
-    display: flex;
-    flex-direction: column;
-    height: 80vh;
-    margin-top: -350px;
+    background-color: #138496;
   }
 </style>

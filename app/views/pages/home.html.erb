@@ -1,145 +1,161 @@
+<!-- Landing Page Section -->
+<div class="container">
+  <div class="login-container">
+    <div class="circle circle-one"></div>
+    <div class="circle circle-two"></div>
+    <h1>Welcome to Capivis App!</h1>
+    <p>Your journey starts here.</p>
 
-  
+    <!-- Donor Buttons Below the Welcome Message -->
+    <% if user_signed_in? && current_user.role == 'donor' %>
+      <% if current_user.donor.present? %>
+        <%= link_to "View My Donor Profile", donors_path, class: "btn-primary mt-3" %>
+      <% else %>
+        <%= link_to "Register Now", new_donor_path, class: "btn-primary mt-3" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
-    <!-- Landing Page Section -->
-    <div class="container">
-      <div class="login-container">
-        <div class="circle circle-one"></div>
-        <div class="circle circle-two"></div>
-        <h1>Welcome to Capivis App!</h1>
-        <p>Your journey starts here.</p>
+<%= yield %>
 
-        <!-- Donor Buttons Below the Welcome Message -->
-        <% if user_signed_in? && current_user.role == 'donor' %>
-          <% if current_user.donor.present? %>
-            <%= link_to "View My Donor Profile", donors_path, class: "btn-primary mt-3" %>
-          <% else %>
-            <%= link_to "Register Now", new_donor_path, class: "btn-primary mt-3" %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>  
-
-    <%= yield %>
-  
 <style>
-
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: var(--background);
+    color: var(--color);
+    letter-spacing: 1px;
+    transition: background 0.2s ease;
+}
 
 a {
     text-decoration: none;
     color: var(--color);
 }
 
-p{
-    font-size: 20px;
-    font-family: monospace;
+p {
+    font-size: 18px;
+    text-align: center;
+    margin: 10px 0;
 }
 
 h1 {
-    font-size: 40px;
-    font-family: sans-serif;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--color);
 }
 
+/* Responsive Container */
 .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    position: absolute;
-    margin-left: 170px;
-
-}
-
-.login-container {
-    position: relative;
-    width: 500px;
-    height: 200px;
-    font-size: 30px;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 80vh;
+    padding: 20px;
     text-align: center;
 }
-.form-container {
-    border: 1px solid hsla(0, 0%, 65%, 0.158);
+
+/* Login Box */
+.login-container {
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    padding: 2rem;
     box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.1);
     z-index: 99;
-    padding: 2rem;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    color: var(--color);
 }
 
+/* Floating Circles */
 .circle {
-    width: 8rem;
-    height: 8rem;
+    width: 6rem;
+    height: 6rem;
     background: var(--primary-color);
     border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
     position: absolute;
-}
-
-.illustration {
-    position: absolute;
-    top: -14%;
-    right: -2px;
-    width: 90%;
+    opacity: 0.3;
+    z-index: -1;
 }
 
 .circle-one {
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transform: translate(-45%, -45%);
-    -webkit-transform: translate(-45%, -45%);
-    -moz-transform: translate(-45%, -45%);
-    -ms-transform: translate(-45%, -45%);
-    -o-transform: translate(-45%, -45%);
+    top: -20px;
+    left: -20px;
 }
 
 .circle-two {
-    bottom: -0.2;
-    right: 0;
-    z-index: -1;
-    transform: translate(45%, 45%);
-    -webkit-transform: translate(45%, 45%);
-    -moz-transform: translate(45%, 45%);
-    -ms-transform: translate(45%, 45%);
-    -o-transform: translate(45%, 45%);
+    bottom: -20px;
+    right: -20px;
 }
 
-@keyframes wobble {
-    0% {
-        transform: scale(1.025);
-        -webkit-transform: scale(1.025);
-        -moz-transform: scale(1.025);
-        -ms-transform: scale(1.025);
-        -o-transform: scale(1.025);
+/* Button Styling */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: rgba(15, 52, 96, 0.8);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        height: auto;
+        padding: 40px 20px;
     }
-    25% {
-        transform: scale(1);
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
-        -ms-transform: scale(1);
-        -o-transform: scale(1);
+
+    .login-container {
+        width: 100%;
     }
-    75% {
-        transform: scale(1.025);
-        -webkit-transform: scale(1.025);
-        -moz-transform: scale(1.025);
-        -ms-transform: scale(1.025);
-        -o-transform: scale(1.025);
+
+    .circle {
+        width: 4rem;
+        height: 4rem;
     }
-    100% {
-        transform: scale(1);
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
-        -ms-transform: scale(1);
-        -o-transform: scale(1);
+
+    h1 {
+        font-size: 26px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        font-size: 14px;
+        padding: 8px 16px;
     }
 }
 
+@media (max-width: 480px) {
+    .login-container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .btn-primary {
+        font-size: 14px;
+        padding: 8px 14px;
+    }
+}
 </style>

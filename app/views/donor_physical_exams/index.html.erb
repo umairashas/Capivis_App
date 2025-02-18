@@ -1,47 +1,174 @@
 <div class="container">
-<div>
-  <div class="d-flex justify-content-between align-items-center mb-4">
-  <h1>Donor Physical Exams</h1>
-  <%= link_to 'Back', current_user.operator? ? operators_path : admin_dashboard_path, class: 'btn btn-primary' %>
+  <div>
+    <div class="header">
+      <h1>Donor Physical Exams</h1>
+      <%= link_to 'Back', current_user.operator? ? operators_path : admin_dashboard_path, class: 'btn btn-primary' %>
+    </div>
+
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Flipchart</th>
+          <th>Donor Consents</th>
+          <th>High Risk Questionnaire Score</th>
+          <th>Body Map</th>
+          <th>Physical Exam</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @donor_physical_exams.each do |exam| %>
+          <tr>
+            <td><%= exam.flipchart? ? 'Yes' : 'No' %></td>
+            <td><%= exam.donor_consents? ? 'Yes' : 'No' %></td>
+            <td><%= exam.high_risk_questionnaire_score %></td>
+            <td><%= exam.body_map.present? ? 'Available' : 'Not Available' %></td>
+            <td><%= exam.physical_exam? ? 'Yes' : 'No' %></td>
+            <td class="action-buttons">
+              <%= link_to 'Show', donor_physical_exam_path(exam), class: 'btn btn-info' %>
+              <% if current_user.operator? %>
+                <%= link_to 'Edit', edit_donor_physical_exam_path(exam), class: 'btn btn-warning' %>
+              <% end %>
+              <% if current_user.admin? %>
+                <%= link_to 'Delete', donor_physical_exam_path(exam), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Flipchart</th>
-      <th>Donor Consents</th>
-      <th>High Risk Questionnaire Score</th>
-      <th>Body Map</th>
-      <th>Physical Exam</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @donor_physical_exams.each do |exam| %>
-      <tr>
-        <td><%= exam.flipchart? ? 'Yes' : 'No' %></td>
-        <td><%= exam.donor_consents? ? 'Yes' : 'No' %></td>
-        <td><%= exam.high_risk_questionnaire_score %></td>
-        <td><%= exam.body_map.present? ? 'Available' : 'Not Available' %></td>
-        <td><%= exam.physical_exam? ? 'Yes' : 'No' %></td>
-        <td>
-          <%= link_to 'Show', donor_physical_exam_path(exam), class: 'btn btn-info' %>
-          <% if current_user.operator? %>
-             <%= link_to 'Edit', edit_donor_physical_exam_path(exam), class: 'btn btn-warning' %>             
-          <% end %>
-          <% if current_user.admin? %>
-          <%= link_to 'Delete', donor_physical_exam_path(exam), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
 <style>
-  .container{
-    margin-top: 100px;
-    display: flex;
-    flex-direction: column;
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Container Styling */
+.container {
+  margin-top: 50px;
+  padding: 20px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  color: white;
+}
+
+/* Table Styling */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.custom-table th, .custom-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.custom-table th {
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+}
+
+/* Button Styling */
+.btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #117a8b;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: black;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 15px;
   }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .custom-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
 </style>

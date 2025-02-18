@@ -27,7 +27,7 @@
           <% end %>
 
           <% if can? :destroy, question %>
-            <%= button_to 'Delete', question_path(question), method: :delete, class: 'btn-delete', data: { confirm: "Are you sure?" } %>
+            <%= link_to 'Delete', question_path(question), class: 'btn-delete', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
           <% end %>
         </td>
       </tr>
@@ -37,30 +37,53 @@
 </div>
 
 <style>
- /* Header Container */
+ /* General Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header Container */
 .header-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 350px;
+  margin-bottom: 50px;
+  text-align: center;
 }
 
 /* Page Title */
 .page-title {
   font-size: 32px;
   font-weight: bold;
-  margin-top: 100px;
+  margin-top: 50px;
+  color: white;
 }
 
 /* Button Styles */
-.btn-add-question, .btn-back, .btn-edit, .btn-delete {
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 700px;
+  margin-top: 20px;
+}
+
+.btn-add-question, 
+.btn-back, 
+.btn-edit, 
+.btn-delete {
   display: inline-block;
   padding: 10px 20px;
   text-decoration: none;
   font-size: 14px;
   border-radius: 5px;
-  margin-left: 10px;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  border: none;
+  cursor: pointer;
 }
 
 .btn-add-question {
@@ -83,7 +106,7 @@
 
 .btn-edit {
   background-color: #ffc107;
-  color: white;
+  color: black;
 }
 
 .btn-edit:hover {
@@ -99,31 +122,51 @@
   background-color: #c82333;
 }
 
+/* Table Container */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: 20px;
+}
+
 /* Table Styling */
 .questions-table {
   width: 100%;
+  max-width: 1000px;
   border-collapse: collapse;
-  margin-top: 20px;
-  table-layout: fixed; /* Ensures a fixed layout and prevents shifting */
+  margin: 30px auto;
+  background-color: transparent;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.questions-table th, .questions-table td {
-  padding: 12px;
+.questions-table th, 
+.questions-table td {
+  padding: 12px 15px;
   text-align: left;
   border: 1px solid #ddd;
 }
 
 .questions-table th {
-  background-color: #fffff;
+  background-color: transparent;
   font-weight: bold;
 }
 
-/* Styling the buttons container */
-.buttons {
-  display: flex;
-  gap: 500px ;
-  margin-top: 30px; /* Add margin to separate from the table */
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .questions-table th, 
+  .questions-table td {
+    padding: 10px;
+  }
+
+  .page-title {
+    font-size: 28px;
+  }
 }
-  
 
 </style>

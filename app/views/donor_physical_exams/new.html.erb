@@ -1,16 +1,120 @@
-<div class="con">
-  <h1>Donor Physical Exam</h1>
-<%= render 'form', donor_physical_exam: @donor_physical_exam %>
-<%= link_to 'Back to List', donor_physical_exams_path %>
-</div>
-<style>
-	.con{
-		margin-top: 100px;
-		display:flex;
-		flex-direction: column;
-		align-items: center;
+<%= form_with(model: @donor_physical_exam, local: true) do |form| %>
+	<% if @donor_physical_exam.errors.any? %>
+	  <div id="error_explanation">
+		<h2><%= pluralize(@donor_physical_exam.errors.count, "error") %> prohibited this exam from being saved:</h2>
+		<ul>
+		  <% @donor_physical_exam.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+		  <% end %>
+		</ul>
+	  </div>
+	<% end %>
+  
+	<div class="form-group">
+	  <%= form.label :flipchart %>
+	  <%= form.check_box :flipchart %>
+	</div>
+  
+	<div class="form-group">
+	  <%= form.label :donor_consents %>
+	  <%= form.check_box :donor_consents %>
+	</div>
+  
+	<div class="form-group">
+	  <%= form.label :high_risk_questionnaire_score %>
+	  <%= form.number_field :high_risk_questionnaire_score, step: 1 %>
+	</div>
+  
+	<div class="form-group">
+	  <%= form.label :body_map %>
+	  <%= form.text_area :body_map, rows: 5 %>
+	</div>
+  
+	<div class="form-group">
+	  <%= form.label :physical_exam %>
+	  <%= form.check_box :physical_exam %>
+	</div>
+  
+	<!-- Hidden fields for donor_id, centre_id, and donor_screening_id -->
+	<%= form.hidden_field :centre_id, value: params[:centre_id] %>
+	<%= form.hidden_field :donor_id, value: params[:donor_id] %>
+	<%= form.hidden_field :donor_screening_id, value: params[:donor_screening_id] %>
+	<%= form.hidden_field :operator_id, value: current_user.operator.id %>
+  
+	<div class="form-group">
+	  <%= form.submit "Save", class: 'submit-button' %>
+	</div>
+  <% end %>
+  
+  <style>
+	/* General form styling */
+	.form-group {
+	  margin-bottom: 20px;
+	  width: 600px;
 	}
-	h1{
-		text-align: center;
+  
+	label {
+	  display: block;
+	  font-weight: bold;
+	  margin-bottom: 5px;
 	}
-</style>
+  
+	input[type="text"],
+	input[type="number"],
+	textarea {
+	  width: 100%;
+	  padding: 8px;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  font-size: 16px;
+	}
+  
+	input[type="checkbox"] {
+	  margin-right: 10px;
+	}
+  
+	textarea {
+	  resize: vertical;
+	}
+  
+	/* Submit button styling */
+	.submit-button {
+	  background-color: #007bff;
+	  color: white;
+	  padding: 10px 20px;
+	  border: none;
+	  border-radius: 4px;
+	  font-size: 16px;
+	  cursor: pointer;
+	  transition: background-color 0.3s;
+	}
+  
+	.submit-button:hover {
+	  background-color: #0056b3;
+	}
+  
+	/* Error message styling */
+	#error_explanation {
+	  background-color: #f8d7da;
+	  color: #721c24;
+	  padding: 15px;
+	  border: 1px solid #f5c6cb;
+	  border-radius: 4px;
+	  margin-bottom: 20px;
+	}
+  
+	#error_explanation h2 {
+	  font-size: 18px;
+	  margin-top: 0;
+	}
+  
+	#error_explanation ul {
+	  list-style-type: none;
+	  padding-left: 0;
+	  margin-bottom: 0;
+	}
+  
+	#error_explanation li {
+	  margin-bottom: 5px;
+	}
+  </style>

@@ -3,6 +3,7 @@ class Admin::AdminController < ApplicationController
   before_action :ensure_admin # Ensure the user is an admin
 
   def dashboard
+    @messages = Message.all
     @section = params[:section]
 
     case params[:section]
